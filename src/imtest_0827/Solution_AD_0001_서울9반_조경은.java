@@ -1,4 +1,4 @@
-package algoad;
+package imtest_0827;
 
 import java.io.*;
 import java.util.*;
@@ -29,10 +29,14 @@ public class Solution_AD_0001_서울9반_조경은 {
 			return;
 		}
 		
-		//
-		
 		res++;
-		shuffle(arr);
+		//res 사용해서 셔플
+		int[] narr = new int[arr.length];
+		
+		
+		
+		
+		shuffle(narr);
 		
 	}
 	public static void main(String[] args) throws Exception {
@@ -48,6 +52,10 @@ public class Solution_AD_0001_서울9반_조경은 {
 			}
 			res=0;
 			shuffle(arr);
+			
+			
+			
+			
 			
 			System.out.println("#" + t + " " + res);
 			
