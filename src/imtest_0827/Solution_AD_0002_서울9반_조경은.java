@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Solution_AD_0002_서울9반_조경은 {
 
 	public static void main(String[] args) throws Exception {
+		//5648
 		System.setIn(new FileInputStream("res/sample_input.txt"));
 		Scanner sc = new Scanner(System.in);
 		int T = sc.nextInt();
