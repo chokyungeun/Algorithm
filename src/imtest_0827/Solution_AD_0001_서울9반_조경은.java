@@ -49,7 +49,6 @@ public class Solution_AD_0001_서울9반_조경은 {
 				arr[i] = sc.nextInt();
 			}
 			
-			
 			System.out.println("#" + t + " " );
 
 		}
