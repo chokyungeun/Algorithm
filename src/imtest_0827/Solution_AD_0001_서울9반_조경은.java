@@ -7,7 +7,8 @@ public class Solution_AD_0001_서울9반_조경은 {
 	public static int N;
 	public static int x = -1;
 
-	public static int[] arr;
+	public static int[
+	                  ] arr;
 
 	public static void shuffle(int[] arr1, int[] front, int[] back) {
 		x++;
