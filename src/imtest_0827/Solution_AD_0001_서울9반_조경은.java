@@ -53,10 +53,6 @@ public class Solution_AD_0001_서울9반_조경은 {
 			res=0;
 			shuffle(arr);
 			
-			
-			
-			
-			
 			System.out.println("#" + t + " " + res);
 			
 			
