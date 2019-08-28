@@ -1,5 +1,4 @@
 package graph;
-
 import java.util.Arrays;
 
 public class PrimTest {
@@ -31,8 +30,29 @@ public class PrimTest {
 		/*for(int i=0; i<N; i++)
 			w[i] = -1;*/
 		Arrays.fill(w, -1); //위와 같은 표현
-		int sum=0;
+		w[0] = 0;
+		for(int k=1; k<N; k++) {
+			int minWeight = INF;
+			int minVertax=0;
+			for(int i=0; i<N; i++) {
+				if(w[i]<0)
+					continue;
+				for(int j=0; j<N; j++) {
+					if(w[j]>=0)
+						continue;
+					if(minWeight>a[i][j]) {
+						minWeight=a[i][j];
+						minVertax = j;
+					}
+				}
+			}
+			w[minVertax] = minWeight;
+			System.out.println(Arrays.toString(w));
+		}
 		
+		int sum=0;
+		for(int i=0; i<N; i++)
+			sum += w[i];
 		return sum;
 	}
 	
