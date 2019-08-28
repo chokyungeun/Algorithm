@@ -8,9 +8,7 @@ public class Solution_AD_0001_서울9반_조경은 {
 	
 	public static void shuffle(int[] arr) {
 		int[] arr2 = new int[arr.length];
-		for(int i=0; i<arr.length; i++) {
-			arr2[i] = arr[i];
-		}
+		arr2 = Arrays.copyOf(arr, arr.length);
 		Arrays.sort(arr2);
 		int num=0;
 		for(int i=0; i<arr.length; i++) {
@@ -23,25 +21,22 @@ public class Solution_AD_0001_서울9반_조경은 {
 		}
 		num=0;
 		for(int i=0; i<arr.length; i++) {
-			for(int j=arr.length-1; j>=0; j--) {
-				if(arr2[j] != arr[i]) {
-					num++;
-				}
+			if(arr2[arr2.length-i-1] != arr[i]) {
+				num++;
 			}
-			
 		}
 		if(num==0) {
 			return;
 		}
 		
-		
+		//
 		
 		res++;
 		shuffle(arr);
 		
 	}
 	public static void main(String[] args) throws Exception {
-		System.setIn(new FileInputStream("res/sample_input.txt"));
+		System.setIn(new FileInputStream("res/input_ad_0001_test.txt"));
 		Scanner sc = new Scanner(System.in);
 		int T = sc.nextInt();
 		for(int t=1; t<=T; t++) {
