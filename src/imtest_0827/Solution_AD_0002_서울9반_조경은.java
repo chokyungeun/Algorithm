@@ -36,7 +36,7 @@ public class Solution_AD_0002_서울9반_조경은 {
 				if(num==0) {
 					break;
 				}
-				for(int i=0; i<N; i++) {
+				for(int i=0; i<list.size(); i++) {
 					int ni = list.get(i)[0] + di[list.get(i)[2]];
 					int nj = list.get(i)[1] + dj[list.get(i)[2]];
 					if(ni>=0 && ni<2000 && nj>=0 && nj<2000) {
@@ -48,9 +48,14 @@ public class Solution_AD_0002_서울9반_조경은 {
 						}
 						else {
 							sum += list.get(i)[3];
-							sum += arr[ni][nj];
 							list.remove(i);
 							//충돌한것도제거!
+							for(int j=0; j<list.size(); j++) {
+								if(list.get(j)[0] == ni && list.get(j)[1] == nj) {
+									sum += list.get(j)[3];
+									list.remove(j--);
+								}
+							}
 						}
 					}
 				}
