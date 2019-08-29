@@ -66,19 +66,19 @@ public class Solution_D4_1251_하나로_서울9반_조경은 {
 		return sum;
 	}
 	public static int findSet(double x) {
-		if(p[x] == x)
-			return x;
+		if(p[(int)x] == (int)x)
+			return (int)x;
 		else
-			return p[x] = findSet(p[x]);
+			return p[(int)x] = findSet(p[(int)x]);
 	}
 	
 	public static void union(double a, double b) {
 		a = findSet(a);
 		b = findSet(b);
 		if(a<b) 
-			p[b] = a;
+			p[(int)b] = (int)a;
 		else
-			p[a] = b;
+			p[(int)a] = (int)b;
 	}
 
 }
