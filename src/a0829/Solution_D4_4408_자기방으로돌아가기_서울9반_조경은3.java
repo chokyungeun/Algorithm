@@ -5,11 +5,25 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.StringTokenizer;
  
-public class Solution_D4_4408_자기방으로돌아가기_서울9반_조경은 {
-    
+public class Solution_D4_4408_자기방으로돌아가기_서울9반_조경은3 {
+    static class Room implements Comparable<Room>{
+        int start, end;
+        public Room(int start, int end) {
+            if(start > end) {
+                this.start = end;
+                this.end = start;
+            }else {
+                this.start = start;
+                this.end = end;
+            }
+        }
+        @Override
+        public int compareTo(Room o) {
+            return this.start - o.start;
+        }
+    }
     public static void main(String[] args) throws Exception{
     	System.setIn(new FileInputStream("res/input_d4_4408.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -17,7 +31,7 @@ public class Solution_D4_4408_자기방으로돌아가기_서울9반_조경은 {
         for(int t=1; t<=T; t++) {
             int N = Integer.parseInt(br.readLine().trim());
             int res = 0;
-            ArrayList<int[]> list = new ArrayList<>();
+            ArrayList<Room> list = new ArrayList<>();
             for(int i=0; i<N; i++) {
             	StringTokenizer st = new StringTokenizer(br.readLine());
                 int start = Integer.parseInt(st.nextToken());
@@ -26,31 +40,19 @@ public class Solution_D4_4408_자기방으로돌아가기_서울9반_조경은 {
                 	start--;
                 if(end%2 == 0) 
                 	end--;
-                list.add(new int[] {start,end});
+                list.add(new Room(start,end));
             }
-            for(int i=0; i<list.size(); i++) {
-            	if(list.get(i)[0] > list.get(i)[1]) {
-            		int te = list.get(i)[0];
-            		list.get(i)[0] = list.get(i)[1];
-            		list.get(i)[1] = te;
-            	}
-            }
-            Collections.sort(list, new Comparator<int[]>() {
-
-				@Override
-				public int compare(int[] o1, int[] o2) {
-					return o1[0]-o2[0];
-				}
-			});
+             
+            Collections.sort(list);
              
             while(!list.isEmpty()) {
             	res++;
-                int[] temp = list.get(0);
+                Room temp = list.get(0);
                 list.remove(temp);
                 for(int i=0; i<list.size(); i++) {
-                    int[] temp2 = list.get(i);
-                    if(temp2[0] > temp[1]) {
-                    	if(temp[1] < temp2[1])
+                    Room temp2 = list.get(i);
+                    if(temp2.start > temp.end) {
+                    	if(temp.end < temp2.end)
                         	temp = temp2;
                         list.remove(temp2);
                         i--;
