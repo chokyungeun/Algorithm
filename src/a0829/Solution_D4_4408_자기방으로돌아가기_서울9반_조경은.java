@@ -25,7 +25,7 @@ public class Solution_D4_4408_자기방으로돌아가기_서울9반_조경은 {
         }
     }
     public static void main(String[] args) throws Exception{
-    	System.setIn(new FileInputStream("res/input_d4_4409_2.txt"));
+    	System.setIn(new FileInputStream("res/input_d4_4408.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
         int T = Integer.parseInt(br.readLine().trim());
