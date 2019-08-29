@@ -3,6 +3,7 @@ package solution;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
@@ -25,9 +26,14 @@ public class Solution_D4_1251_하나로_서울9반_조경은 {
 				Y[i] = Integer.parseInt(st.nextToken());
 			}
 			double E = Double.parseDouble(br.readLine());
-			System.out.println(Arrays.toString(X));
-			System.out.println(Arrays.toString(Y));
-			System.out.println(E);
+			ArrayList<double[]> list = new ArrayList<>();
+			for(int i=0; i<N; i++) {
+				list.add(new double[] {X[i], Y[i]});
+			}
+			
+			
+			
+			
 		}
 	}
 
