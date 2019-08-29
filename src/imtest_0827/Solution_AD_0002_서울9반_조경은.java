@@ -1,6 +1,8 @@
 package imtest_0827;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,13 +11,15 @@ public class Solution_AD_0002_서울9반_조경은 {
 	public static void main(String[] args) throws Exception {
 		//5648
 		System.setIn(new FileInputStream("res/input_ad_0002.txt"));
-		Scanner sc = new Scanner(System.in);
-		int T = sc.nextInt();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		int T = Integer.parseInt(br.readLine());
 		for(int t=1; t<=T; t++) {
-			int N = sc.nextInt();
+			int N = Integer.parseInt(br.readLine());
 			ArrayList<int[]> list = new ArrayList<>();
 			for(int i=0; i<N; i++) {
-				list.add(new int[] {sc.nextInt()*10, sc.nextInt()*10, sc.nextInt(), sc.nextInt()});
+				String[] s = br.readLine().split(" ");
+				list.add(new int[] {Integer.parseInt(s[0])*10, Integer.parseInt(s[1])*10, Integer.parseInt(s[2]), Integer.parseInt(s[3])});
 			}
 			int[] di = {0,0,-1,1};
 			int[] dj = {1,-1,0,0};
@@ -61,9 +65,9 @@ public class Solution_AD_0002_서울9반_조경은 {
 				}
 			}
 			
-			System.out.println("#" + t + " " + sum);
+			sb.append("#" + t + " " + sum + "\n");
 		}
-
+		System.out.println(sb);
 	}
 
 }
