@@ -9,6 +9,7 @@ public class Solution_D3_1873_상호의배틀필드_서울9반_조경은 {
 	public static void main(String[] args) throws Exception {
 		System.setIn(new FileInputStream("res/input_d3_1873.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
 		int T = Integer.parseInt(br.readLine());
 		for (int t = 1; t <= T; t++) {
 			String[] s = br.readLine().split(" ");
@@ -114,15 +115,15 @@ public class Solution_D3_1873_상호의배틀필드_서울9반_조경은 {
 					}
 				}
 			}
-			System.out.print("#" + t + " ");
+			sb.append("#" + t + " ");
 			for (int i = 0; i < H; i++) {
 				for (int j = 0; j < W; j++) {
-					System.out.print(arr[i][j]);
+					sb.append(arr[i][j]);
 				}
-				System.out.println();
+				sb.append("\n");
 			}
 		}
-
+		System.out.println(sb.toString());
 	}
 
 }
