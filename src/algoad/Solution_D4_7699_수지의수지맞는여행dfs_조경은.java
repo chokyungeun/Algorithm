@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class Solution_D4_7699_수지의수지맞는여행_조경은 {
+public class Solution_D4_7699_수지의수지맞는여행dfs_조경은 {
 	public static int[] di = {-1, 1, 0, 0};
 	public static int[] dj = {0,0,-1, 1};
 	public static char[][] arr;
