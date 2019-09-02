@@ -10,6 +10,7 @@ public class Solution_D4_3234_준환이의양팔저울_조경은2 {
 	public static void main(String[] args) throws Exception {
 		System.setIn(new FileInputStream("res/input_d4_3234.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
 		int T = Integer.parseInt(br.readLine());
 		for(int t=1; t<=T; t++) {
 			int N = Integer.parseInt(br.readLine());
@@ -21,8 +22,9 @@ public class Solution_D4_3234_준환이의양팔저울_조경은2 {
 			}
 			result = 0;
 			dfs(w, v, 0, 0, 0);
-			System.out.println("#" + t + " " + result);
+			sb.append("#" + t + " " + result + "\n");
 		}
+		System.out.println(sb);
 		br.close();
 	}
 
