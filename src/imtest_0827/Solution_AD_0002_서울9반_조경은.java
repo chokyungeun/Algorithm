@@ -27,7 +27,7 @@ public class Solution_AD_0002_서울9반_조경은 {
 			int sum=0;
 			int num = 0;
 			
-			while(num < 3600) {
+			while(!list.isEmpty()) {
 				num++;
 				if(list.size() == 0 || list.size() == 1)
 					break;
