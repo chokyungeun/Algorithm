@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
-public class Solution_D4_3234_준환이의양팔저울_조경은2 {
+public class Solution_D4_3234_준환이의양팔저울_void_dfs_조경은 {
 	public static int result;
 	
 	public static void main(String[] args) throws Exception {
