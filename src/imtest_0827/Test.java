@@ -5,20 +5,18 @@ import java.util.ArrayList;
 public class Test {
 
 	public static void main(String[] args) {
-		ArrayList<Integer> list = new ArrayList<>();
-		list.add(1);
-		list.add(2);
-		list.add(1);
-		list.add(1);
-		list.add(1);
-		list.add(1);
-		for(int i=0; i<list.size(); i++) {
-			if(list.get(i) ==1) {
-				list.remove(i);
-			}
-		}
-		System.out.println(list);
-
+		String s = "";
+		char[] c = {'A', 'B', 'C'};
+		
+		s += c[0];
+		s += c[1];
+		s += c[2];
+		
+		//s.substring(s.length());
+		s = s.substring(0, s.length()-1);
+		
+		System.out.println(s);
+		
 	}
 
 }
