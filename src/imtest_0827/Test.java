@@ -5,17 +5,13 @@ import java.util.ArrayList;
 public class Test {
 
 	public static void main(String[] args) {
-		String s = "";
-		char[] c = {'A', 'B', 'C'};
+		ArrayList<int[]> list = new ArrayList<>();
+		list.add(new int[] {1, 2,3});
+		list.add(new int[] {4, 5,6});
+		list.get(0)[2] = 9;
 		
-		s += c[0];
-		s += c[1];
-		s += c[2];
 		
-		//s.substring(s.length());
-		s = s.substring(0, s.length()-1);
-		
-		System.out.println(s);
+		System.out.println(list.get(0)[2]);
 		
 	}
 
