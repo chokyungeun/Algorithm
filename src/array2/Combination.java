@@ -20,7 +20,7 @@ public class Combination {
 			return;
 		}
 		
-		for(int i=start; i<=n; i++) {
+		for(int i=start; i<n; i++) {
 			a[count] = i;
 			combination(i, count+1);
 		}
@@ -31,7 +31,7 @@ public class Combination {
 		n = 5;//sc.nextInt();
 		r = 3;//sc.nextInt();
 		a = new int[r];
-		combination(1, 0);
+		combination(0, 0);
 		System.out.println(cnt);
 		sc.close();
 	}
