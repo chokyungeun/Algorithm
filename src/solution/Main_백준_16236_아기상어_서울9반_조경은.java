@@ -10,7 +10,47 @@ public class Main_백준_16236_아기상어_서울9반_조경은 {
 	public static int N, res, size, f;
 	public static ArrayList<int[]> l;
 	
-	public static void bfs(int i, int j) {
+	public static void bfs(int i, int j, int depth) {
+		Queue<int[]> q = new LinkedList<>();
+		if(depth == N+1) {
+			res = depth;
+			return;
+		}
+		int index = 0;
+		for(int row=0; row<N; row++) {
+			for(int col=0; col<N; col++) {
+				if(arr[row][col] != 0) {
+					index++;
+				}
+			}
+		}
+		if(index == 1) {
+			res = depth;
+			return;
+		}
+		depth++;
+		q.offer(new int[] {i, j});
+		while(!q.isEmpty()) {
+			int[] curr = q.poll();
+			
+			for(int k=0; k<di.length; k++) {
+				int ni = curr[0] + di[k]*depth;
+				int nj = curr[0] + dj[k]*depth;
+				if(ni>=0 && ni<N && nj>=0 && nj<N && arr[ni][nj] < size) {
+					f+=arr[ni][nj];
+					if(f>=size) {
+						size += f/size;
+						f = f%size;
+					}
+					arr[ni][nj] = 9;
+					arr[i][j] = 0;
+					q.offer(new int[] {ni, nj});
+				}
+			}
+			
+		}
+		
+		bfs(i, j, depth);
 		
 	}
 	
@@ -31,7 +71,9 @@ public class Main_백준_16236_아기상어_서울9반_조경은 {
 			}
 		}
 		res = 0;
-		bfs(row, col);
+		size = 2;
+		f = 0;
+		bfs(row, col, 0);
 		
 		System.out.println(res);
 
