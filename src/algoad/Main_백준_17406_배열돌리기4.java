@@ -4,104 +4,127 @@ import java.util.*;
 import java.io.*;
 
 public class Main_백준_17406_배열돌리기4 {
-	public static int N, M, K, min;
-	public static Point[] points;
-	public static int dr[] = {0,1,0,-1};
-	public static int dc[] = {1,0,-1,0};
-	public static boolean[] visit;
-	public static class Point{
-		int r, c, s;
-		Point(int r, int c, int s){
-			this.r = r;
-			this.c =c;
-			this.s =s;
-		}
-		
-	}
-	
-	public static void rotate(Point pt, int[][] map) {
-		int S = pt.s;
-		int r = pt.r;
-		int c = pt.c;
-		for(int s=1; s<=S; s++) {
-			int tr = r-s;
-			int tc= c-s;
-			
-			int tmp = map[tr][tc];
-			int dir = 0;
-			do {
-				int nr = tr + dr[dir];
-				int nc = tc + dc[dir];
-				
-				int prev = tmp;
-				tmp = map[nr][nc];
-				map[nr][nc] = prev;
-				
-				tr = nr;
-				tc = nc;
-				
-				if(tr == r-s && tc==c+s) dir=1;
-				if(tr == r+s && tc==c+s) dir=2;
-				if(tr == r+s && tc==c-s) dir=3;
+	public static int N, M, K, Ans;
+	public static int[][] A, B;// ,C;
+	public static int[] r, c, s, d;
+
+	public static void main(String[] args) throws Exception {
+		System.setIn(new java.io.FileInputStream("res/input_BJ_17406.txt"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		// StringBuilder sb = new StringBuilder();
+		StringTokenizer st;
+
+		st = new StringTokenizer(br.readLine());
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+		K = Integer.parseInt(st.nextToken());
+		A = new int[N][M];
+		B = new int[N][M]; // copy용
+		// C = new int[N][M]; //copy용
+		r = new int[K];
+		c = new int[K];
+		s = new int[K]; // 이 세개를 하나의 클래스로 정의해도 된다.
+		d = new int[K]; // 순서 정하는 용도(순열의 인덱스를 가지고 있는 배열)
+
+		for (int n = 0; n < N; n++) {
+			st = new StringTokenizer(br.readLine());
+			int m = 0;
+			while (st.hasMoreTokens()) {
+				A[n][m++] = Integer.parseInt(st.nextToken());
 			}
-			while(tr!=r-s || tc!=c-s);
-		}
-		
+			// System.out.println(Arrays.toString(A[n]));
+		} // A를 받음
+		for (int k = 0; k < K; k++) {
+			st = new StringTokenizer(br.readLine());
+			r[k] = Integer.parseInt(st.nextToken()) - 1;
+			c[k] = Integer.parseInt(st.nextToken()) - 1;
+			s[k] = Integer.parseInt(st.nextToken());
+			d[k] = k;
+			// System.out.println(r[k]);
+		} // 회전방법 k개를 받음
+			// 입력 끝
+
+		Ans = Integer.MAX_VALUE;
+		perm(0);
+		// 1.K의 순서 K!을 구하자
+		// 2.회전연산
+		// 3.A의 값을 구하면서 최소값 갱신
+		System.out.println(Ans); // 배열 A의 값의 최솟값을 출력한다.
 	}
-	
-	public static void dfs(int depth, int oper, int[][] map) {
-		int[][] tap = new int[N][M];
-		for(int i=0; i<N; i++)
-			System.arraycopy(map[i], 0, tap[i], 0, M);
-		
-		if(oper!=-1)
-			rotate(points[oper],tap);
-		if(depth == K) {
-			for(int i=0; i<N; i++) {
-				int sum = 0;
-				for(int j=0; j<M; j++){
-					sum += tap[i][j];
-				}
-				min = Math.min(min,  sum);
-			}
+
+	public static void swap(int i, int j) {
+		if (i == j)
+			return;
+		int T = d[i];
+		d[i] = d[j];
+		d[j] = T;
+	}
+
+	public static void perm(int depth) {
+		//// K배열이 만들어 졌을 때 돌리는게 아니고
+		if (depth == K) {
+			// 1.완성 K!번
+			B = copy(A); // 매 K순서 시작 전 카피해서 초기화 하고 시작
+			kturn(B);// 2.
 			return;
 		}
-		//perm
-		for(int i=0; i<K; i++) {
-			if(!visit[i]) {
-				visit[i] = true;
-				dfs(depth+1, i, tap);
-				visit[i] = false;
-			}
+		for (int k = depth; k < K; k++) {
+			swap(depth, k);
+			perm(depth + 1);
+			swap(depth, k);
 		}
 	}
-	
-	public static void main(String[] args) throws Exception {
-		Scanner sc = new Scanner(System.in);
-		N = sc.nextInt();
-		M = sc.nextInt();
-		K = sc.nextInt();
-		
-		int[][] map = new int[N][M];
-		points = new Point[K];
-		visit = new boolean[K];
-		
-		for(int i=0; i<N;i++) {
-			for(int j=0; j<M; j++) {
-				map[i][j] = sc.nextInt();
+
+	public static void kturn(int[][] br) {
+		for (int k = 0; k < K; k++) {
+			turnforreal(br, d[k]);
+		} // 만든 순서대로 K번 돌리기
+			// int a = getA(br); //A를 구하기
+		getA(br);
+		// if(Ans>a) Ans = a; //3.
+	}
+
+	public static void turnforreal(int[][] B, int dk) { // 돌리기...ㅜㅜ어렵
+		int rr = r[dk];
+		int cc = c[dk];
+		int ss = s[dk];
+
+		for (int s = 1; s <= ss; s++) {
+			int temp = B[rr - s][cc - s]; // 처음꺼 빼놓기(덮어씌워지므로)
+			int S = s * 2 + 1; // 한변의 길이 s번째에서
+			for (int i = 1; i < S; i++) { // 하
+				B[rr - s + i - 1][cc - s] = B[rr - s + i][cc - s];
 			}
+			for (int i = 1; i < S; i++) { // 우
+				B[rr + s][cc - s + i - 1] = B[rr + s][cc - s + i];
+			}
+			for (int i = 1; i < S; i++) { // 상
+				B[rr + s - i + 1][cc + s] = B[rr + s - i][cc + s];
+			}
+			for (int i = 1; i < S - 1; i++) { // 좌 //S-1
+				B[rr - s][cc + s - i + 1] = B[rr - s][cc + s - i];
+			}
+			B[rr - s][cc - s + 1] = temp; // 마지막에 여기다 넣기
 		}
-		
-		for(int i=0; i<K; i++) {
-			points[i] = new Point(sc.nextInt()-1, sc.nextInt()-1, sc.nextInt());
+	}
+
+	public static int[][] copy(int[][] ar) {
+		for (int i = 0; i < N; i++) {
+			System.arraycopy(ar[i], 0, B[i], 0, M); // pass by value
 		}
-		
-		min = Integer.MAX_VALUE;
-		
-		dfs(0, -1, map);
-		System.out.println(min);
-		
-		sc.close();
-		
+		return B;
+	}
+
+	public static void getA(int[][] br) {
+		// int min=Integer.MAX_VALUE; //필요없고 그냥 계속 Ans와 비교하면 된다! 최소값의 최소값이므로!
+		for (int n = 0; n < N; n++) {
+			int as = 0; // 매행의 합!
+			for (int m = 0; m < M; m++) {
+				as += br[n][m];
+			}
+			if (Ans > as)
+				Ans = as;
+		}
+		// return Ans;
 	}
 }
