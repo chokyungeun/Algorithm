@@ -5,9 +5,6 @@ import java.io.*;
 
 public class Main_백준_17143_낚시왕_서울9반_조경은 {
 	
-	
-	
-	
 	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
@@ -40,13 +37,15 @@ public class Main_백준_17143_낚시왕_서울9반_조경은 {
 			});
 			
 			for(int i=0; i<list.size()-1;) {
+				
 				if(list.get(i)[1] == list.get(i+1)[1] && list.get(i)[0] == list.get(i+1)[0]) {
 					if(list.get(i)[4] > list.get(i+1)[4]) {
 						list.remove(i+1);
 					}
 					else {
 						list.remove(i);
-						i--;
+						if(i-1 >=0)
+							i--;
 					}
 				}
 				else {
@@ -63,8 +62,8 @@ public class Main_백준_17143_낚시왕_서울9반_조경은 {
 				}
 			}
 			
+			//상어이동
 			
-			//상어이동!
 			for(int i=0; i<list.size(); i++) {
 				int ni = list.get(i)[0];
 				int nj = list.get(i)[1];
@@ -91,7 +90,6 @@ public class Main_백준_17143_낚시왕_서울9반_조경은 {
 				}
 				list.get(i)[0] = ni;
 				list.get(i)[1] = nj;
-				
 			}
 			
 		}
