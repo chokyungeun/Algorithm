@@ -12,6 +12,21 @@ public class Main_백준_17136_색종이붙이기_조경은 {
 	 
 	    public static void func(int i, int j, int p) {
 	    	if(p == 0) {
+	    		int n=0;
+	    		for(int row=0; row<10; row++) {
+	    			for(int col=0; col<10; col++) {
+	    				if(arr[row][col]!=0) {
+	    					n++;
+	    				}
+	    			}
+	    		}
+	    		if(n!=0) {
+	    			for(int x=0; x<paper.length; x++) {
+	    				if(paper[x] != 0) {
+	    					start();
+	    				}
+	    			}
+	    		}
 	    		return;
 	    	}
 	    	for(int row=i; row<i+p; row++) {
@@ -51,6 +66,17 @@ public class Main_백준_17136_색종이붙이기_조경은 {
 	    		func(i,j,p-1);
 	    	}
 	    }
+	    
+	    public static void start() {
+	    	 for(int i=0; i<10; i++) {
+		        	for(int j=0; j<10; j++) {
+		        		if(arr[i][j] == 1) {
+		        			func(i, j, 5);
+		        		}
+		        	}
+		        }
+	    }
+	    
 	    public static void main(String[] args) throws Exception {
 	        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	        StringTokenizer st;
@@ -61,13 +87,7 @@ public class Main_백준_17136_색종이붙이기_조경은 {
 	                num += arr[i][j];       //1의 개수 세기
 	            }
 	        }
-	        for(int i=0; i<10; i++) {
-	        	for(int j=0; j<10; j++) {
-	        		if(arr[i][j] == 1) {
-	        			func(i, j, 5);
-	        		}
-	        	}
-	        }
+	       start();
 	        
 	        for(int i=1; i<paper.length; i++) {
 	        	res -= paper[i];
