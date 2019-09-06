@@ -44,26 +44,29 @@ public class Main_백준_17135_캐슬디펜스_조경은 {
 				break;
 			}
 
-			// 궁수가 활쏨
-			int remain = 3;
+			// 궁수가 활쏨(동시에 쏠 수 있음!) 문제 제대로 읽자ㅠㅠㅠㅠㅠㅠ
+			ArrayList<int[]> shot = new ArrayList<>();
+			
 			for (int i = 0; i < 3; i++) {
 				Loop: for(int d=1; d<=D; d++) {
-					for (int row = N - 1; row >= 0; row--) {
-						for (int col = 0; col < M; col++) {
+					for (int col = 0; col < M; col++) {
+						for (int row = 0; row < N; row++) {
 							if (Math.abs(row - N) + Math.abs(l[i] - col) == d && arr2[row][col] == 1) {
-								res++;
-								remain--;
-								arr2[row][col] = 0;
-							}
-							if (remain == 0) {
+								shot.add(new int[] {row,col});
 								break Loop;
 							}
 						}
 					}
 				}
-
 			}
-
+			for(int i=0; i<shot.size(); i++) {
+				if(arr2[shot.get(i)[0]][shot.get(i)[1]] == 1) {
+					res++;
+					arr2[shot.get(i)[0]][shot.get(i)[1]] = 0;
+				}
+			}
+			
+			
 			// 한 칸씩 이동
 			for (int i = N - 1; i > 0; i--) {
 				for (int j = 0; j < M; j++) {
