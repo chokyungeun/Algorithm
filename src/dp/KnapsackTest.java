@@ -26,8 +26,8 @@ public class KnapsackTest {
 			v[i] = sc.nextInt();
 		}
 		
-		for(int i=1; i<=N; i++) {
-			for(int j=1; j<=W; j++) {
+		for(int i=1; i<=N; i++) { //i는 아이템의 무게
+			for(int j=1; j<=W; j++) { //j는 배낭의 무게
 				if(w[i]>j) {
 					k[i][j]=k[i-1][j];
 				}
