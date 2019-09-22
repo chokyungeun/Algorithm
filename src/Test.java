@@ -1,6 +1,7 @@
 import java.util.Arrays;
 
 public class Test {
+<<<<<<< HEAD
 	public static int n,r,cnt,a[],v[],d[]={1,2,3,4,5};
 	public static void permComb(int start, int count) {
 		if(count == r) {
@@ -24,6 +25,20 @@ public class Test {
 		a = new int[r];
 		permComb(0,0);
 		System.out.println(cnt);
+=======
+
+	public static void main(String[] args) {
+		int N = 6;
+		int[] Y = new int[N+1];
+		Y[0] = 1;
+		Y[1] = 2;
+		for(int i=2; i<=N; i++) {
+			Y[i] = 2*Y[i-1] + Y[i-2];
+		}
+		System.out.println(Y[N]);
+		System.out.println("Y" + Arrays.toString(Y));
+
+>>>>>>> branch 'master' of https://lab.ssafy.com/chokyungeun/algo.git
 	}
 
 }
