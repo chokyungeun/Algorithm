@@ -29,7 +29,7 @@ public class PermComb {
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		n = 5;//sc.nextInt();
+		n = 3;//sc.nextInt();
 		r = 3;//sc.nextInt();
 		v = new int[n]; //사용 여부 체크
 		a = new int[r];
