@@ -19,6 +19,11 @@ public class Solution_D4_4301_콩많이심기_서울9반_조경은 {
 			int M = Integer.parseInt(s[1]);
 			
 			int res = 0;
+			for(int i=0; i<N; i++) {
+				for(int j=0; j<M; j++) {
+					
+				}
+			}
 			
 			
 			System.out.println("#" + t + " " + res);
