@@ -8,7 +8,7 @@ import java.util.Scanner;
 //중복조합 nHr=(n+r-1)Cr 5H3=(5+3-1)C3=7C3=7P3/3!=7*6*5/3*2*1=35
 //조합 nCr=nPr/r! 5C3=5P3/3!=5*4*3/3*2*1=10
 public class PermComb {
-	public static int n,r,cnt,a[],v[],d[]={1,2,3,4,5};
+	public static int n,r,cnt,a[],v[],d[]={1,2,3};
 	
 	public static void permComb(int start, int count) {
 		if(count == r) {

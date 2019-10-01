@@ -38,7 +38,7 @@ public class Main_정올_1828_냉장고_서울9반_조경은 {
 		Refri(list);
 	}
 	public static void main(String[] args) throws Exception {
-		System.setIn(new FileInputStream("res/input_jo_1828.txt"));
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
 		ArrayList<int[]> list = new ArrayList<>();
