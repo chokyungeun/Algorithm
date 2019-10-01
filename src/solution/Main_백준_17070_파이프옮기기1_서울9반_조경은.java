@@ -8,7 +8,7 @@ public class Main_백준_17070_파이프옮기기1_서울9반_조경은 {
 	public static boolean[][] v;
 	public static int[] di = {1,0,1};
 	public static int[] dj = {0,1,1};
-	
+	public static int dir;
 	public static void dfs(int i, int j) {
 		if(i==N-1 && j==N-1) {
 			res++;
@@ -41,6 +41,7 @@ public class Main_백준_17070_파이프옮기기1_서울9반_조경은 {
 		}
 		v[0][0] = true;
 		res = 0;
+		dir = 0;  
 		dfs(0,1);
 		
 		System.out.println(res);
