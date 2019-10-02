@@ -22,11 +22,10 @@ public class Main_정올_1024_내리막길_백준_1520_서울9반_조경은 {
 				int ni = i+di[k];
 				int nj = j+dj[k];
 				
-				if(ni>=0 && ni<R && nj>=0 && nj<C && !v[ni][nj] && arr[ni][nj] < arr[i][j]) {
+				if(ni>=0 && ni<R && nj>=0 && nj<C && arr[ni][nj] < arr[i][j]) {
 					memo[i][j]+=dfs(ni,nj);
 				}
 			}
-			v[i][j] = false;
 		}
 		
 		return memo[i][j];
