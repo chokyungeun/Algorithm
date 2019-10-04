@@ -1,4 +1,4 @@
-package solution;
+package a1004;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -20,7 +20,7 @@ public class Solution_D4_1486_장훈이의높은선반_서울9반_조경은 {
 			list.add(sum);
 			return;
 		}
-		for(int i=0; i<N; i++) {
+		for(int i=start; i<N; i++) {
 			if(v[i]==0) {
 				v[i] = 1; 
 				a[count] = H[i];
@@ -37,14 +37,14 @@ public class Solution_D4_1486_장훈이의높은선반_서울9반_조경은 {
 		for (int t = 1; t <= T; t++) {
 			st = new StringTokenizer(br.readLine());
 			N = Integer.parseInt(st.nextToken());
-			int B = Integer.parseInt(st.nextToken());
+			int B = Integer.parseInt(st.nextToken()); 
 			st = new StringTokenizer(br.readLine());
 			H = new int[N];
 			for(int i=0; i<N; i++) {
 				H[i] = Integer.parseInt(st.nextToken());
 			}
 			list = new ArrayList<>();
-			for(int i=1; i<N; i++) {
+			for(int i=1; i<=N; i++) {
 				r = i;
 				a = new int[i];
 				v = new int[N];
