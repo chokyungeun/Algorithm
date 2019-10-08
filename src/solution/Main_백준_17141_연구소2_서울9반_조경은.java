@@ -46,13 +46,14 @@ public class Main_백준_17141_연구소2_서울9반_조경은 {
 
 	public static void permComb(int start, int count) {
 		if(count == M) {
+			int res=0;
 			for(int i=0; i<N; i++) {
 				temp[i] = arr[i].clone();
 			}
 			for(int i=0; i<list.size(); i++) {
-				bfs(list.get(i)[0], list.get(i)[1]);
+				res = Math.max(res, bfs(list.get(i)[0], list.get(i)[1]));
 			}
-			for(int )
+			//0이 남아있으면 res = -1
 			return;
 		}
 		for(int i=0; i<virus.size(); i++) { 
@@ -69,6 +70,7 @@ public class Main_백준_17141_연구소2_서울9반_조경은 {
 	}
 
 	private static int bfs(int i, int j) {
+		//시간 측정해야함
 		int res=0;
 		int index=0;
 		ArrayList<Integer> time = new ArrayList<>();
@@ -93,7 +95,7 @@ public class Main_백준_17141_연구소2_서울9반_조경은 {
 			
 			
 		}
-		for(int k=0; k<)
+		
 		return res;
 	}
 }
