@@ -5,8 +5,7 @@ import java.util.*;
 
 public class Solution_D4_1249_보급로_서울9반_조경은 {
 	public static int[][] arr, memo;
-	public static boolean[][] v;
-	public static int N, res, res2;
+	public static int N;
 	public static int[] di = { -1, 1, 0, 0 };
 	public static int[] dj = { 0, 0, -1, 1 };
 
@@ -41,7 +40,6 @@ public class Solution_D4_1249_보급로_서울9반_조경은 {
 				Arrays.fill(memo[i], INF);
 			}
 			memo[0][0]=0;
-			v = new boolean[N][N];
 			for (int i = 0; i < N; i++) {
 				char[] c = br.readLine().toCharArray();
 				for (int j = 0; j < N; j++) {
