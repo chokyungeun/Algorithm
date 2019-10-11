@@ -18,9 +18,9 @@ public class Solution_D5_7396_종구의딸이름짓기_서울9반_조경은 {
 
 	public static StringBuilder sb;
 	public static int N, M;
-	public static char[][] maps;
+	public static char[][] arr;
 	public static int[][] v;
-	public static int[] dr = { 0, 1 }, dc = { 1, 0 };
+	public static int[] di = { 0, 1 }, dj = { 1, 0 };
 
 	public static void main(String[] args) throws Exception {
 		System.setIn(new FileInputStream("res/input_d5_7396.txt"));
@@ -34,10 +34,10 @@ public class Solution_D5_7396_종구의딸이름짓기_서울9반_조경은 {
 
 			N = Integer.parseInt(st.nextToken());
 			M = Integer.parseInt(st.nextToken());
-			maps = new char[N][M];
+			arr = new char[N][M];
 			v = new int[N][M];
 			for (int i = 0; i < N; i++) {
-				maps[i] = br.readLine().toCharArray();
+				arr[i] = br.readLine().toCharArray();
 			}
 
 			sb.append("#" + tc + " ");
@@ -59,8 +59,8 @@ public class Solution_D5_7396_종구의딸이름짓기_서울9반_조경은 {
 			}
 		});
 		ArrayList<Character> sol = new ArrayList<>(); 
-		q.offer(new Points(0, 0, maps[0][0], 1));
-		sol.add(maps[0][0]);
+		q.offer(new Points(0, 0, arr[0][0], 1));
+		sol.add(arr[0][0]);
 		int cnt = v[0][0] = 1;
 		char x = '0';
 		loop: while (!q.isEmpty()) {
@@ -71,19 +71,19 @@ public class Solution_D5_7396_종구의딸이름짓기_서울9반_조경은 {
 					sb.append(sol.get(i));
 				return;
 			} else if (r == N - 1 && c == M - 1) {
-				sol.add(maps[r][c]);
+				sol.add(arr[r][c]);
 				for (int i = 0; i < sol.size(); i++)
 					sb.append(sol.get(i));
 				return;
 			}
 
-			if (cnt < v[r][c]) { // 만약 턴이 다음으로 넘어간다면
-				sol.add(maps[r][c]);
+			if (cnt < v[r][c]) { 
+				sol.add(arr[r][c]);
 				cnt = v[r][c];
-				x = maps[r][c];
+				x = arr[r][c];
 			}
 
-			if (cnt == v[r][c] && x != maps[r][c]) {
+			if (cnt == v[r][c] && x != arr[r][c]) {
 				x = '0';
 				while (!q.isEmpty()) {
 					cnt = v[r][c];
@@ -95,13 +95,13 @@ public class Solution_D5_7396_종구의딸이름짓기_서울9반_조경은 {
 				}
 			}
 
-			for (int d = 0; d < dr.length; d++) {
-				int nr = r + dr[d];
-				int nc = c + dc[d];
+			for (int d = 0; d < di.length; d++) {
+				int nr = r + di[d];
+				int nc = c + dj[d];
 
 				if (isIn(nr, nc) && v[nr][nc] == 0) {
 					v[nr][nc] = v[r][c] + 1;
-					q.offer(new Points(nr, nc, maps[nr][nc], v[nr][nc]));
+					q.offer(new Points(nr, nc, arr[nr][nc], v[nr][nc]));
 				}
 			}
 		}
