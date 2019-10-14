@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
 public class Solution_D4_4408_자기방으로돌아가기_서울9반_조경은 {
     
     public static void main(String[] args) throws Exception{
-    	//System.setIn(new FileInputStream("res/input_d4_4408.txt"));
+    	System.setIn(new FileInputStream("res/input_d4_4408.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int T = Integer.parseInt(br.readLine().trim());
         for(int t=1; t<=T; t++) {
