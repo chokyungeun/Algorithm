@@ -3,7 +3,7 @@ package a1010;
 import java.io.*;
 import java.util.*;
 
-public class Solution_D4_1249_보급로_서울9반_조경은 {
+public class Solution_D4_1249_보급로_서울9반_조경은_bfs {
 	public static int[][] arr, memo;
 	public static int N;
 	public static int[] di = { -1, 1, 0, 0 };
