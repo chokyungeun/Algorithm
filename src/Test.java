@@ -4,8 +4,11 @@ import java.util.*;
 public class Test {
 
 	public static void main(String[] args) throws Exception {
-		System.out.println(Math.pow(2, 3));
+		ArrayList<Integer> list = new ArrayList<>();
+		list.add(1);
+		list.set(0, list.get(0)+1);
 		
+		System.out.println(list);
 		
 		
 	}
