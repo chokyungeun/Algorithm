@@ -4,11 +4,11 @@ import java.util.*;
 public class Test {
 
 	public static void main(String[] args) throws Exception {
-		ArrayList<Integer> list = new ArrayList<>();
-		list.add(1);
-		list.set(0, list.get(0)+1);
-		
-		System.out.println(list);
+		char a = '5';
+		int b = 5;
+		if(a-'0' == b) {
+			System.out.println("YES");
+		}
 		
 		
 	}

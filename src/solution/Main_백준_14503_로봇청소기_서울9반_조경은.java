@@ -10,36 +10,26 @@ public class Main_백준_14503_로봇청소기_서울9반_조경은 {
 	public static int[] di = { -1, 0, 1, 0 }; // 상우하좌(북동남서)
 	public static int[] dj = { 0, 1, 0, -1 };
 
-	public static void clean(int i, int j, int k) {
-		if (!v[i][j]) {
-			res++;
-			v[i][j] = true;
-		}
-
-		int ni = i + di[(d + 3) % 4];
-		int nj = j + dj[(d + 3) % 4];
-
-		if (ni >= 0 && ni < N && nj >= 0 && nj < M && !v[ni][nj] && map[ni][nj] == 0) {
-			d = (d + 3) % 4;
-			clean(ni, nj, 0);
-		} 
-		else {
-			if (k + 1 == 4) {
-				ni = i + di[(d + 2) % 4];
-				nj = j + dj[(d + 2) % 4];
-				if (ni >= 0 && ni < N && nj >= 0 && nj < M && map[ni][nj] == 0) {
-					clean(ni, nj, 0);
-					return;
+	public static void clean(int i, int j, int d) {
+		v[i][j] = true;
+		res++;
+		
+		for(int k=0; k<di.length; k++) {
+			int ni = i + di[(d+3-k)%4];
+			int nj = j + dj[(d+3-k)%4];
+			if(ni>=0 && ni<N && nj>=0 && nj<M && !v[ni][nj] && map[ni][nj]==0) {
+				clean(ni,nj,(d+3-k)%4);
+				break;
+			}
+			if(k==di.length-1) {
+				ni = i - di[d];
+				nj = j - dj[d];
+				if(ni>=0 && ni<N && nj>=0 && nj<M && map[ni][nj]==0) {
+					res--;
+					clean(ni,nj,d);
 				}
-
-			} 
-			else {
-				d = (d + 3) % 4;
-				clean(i, j, k + 1);
-				return;
 			}
 		}
-
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -60,7 +50,9 @@ public class Main_백준_14503_로봇청소기_서울9반_조경은 {
 			}
 		}
 		res = 0;
-		clean(r, c, 0);
+		
+		clean(r,c,d);
+		
 		System.out.println(res);
 	}
 
