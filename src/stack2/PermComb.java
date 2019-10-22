@@ -16,7 +16,7 @@ public class PermComb {
 			System.out.println(Arrays.toString(a));
 			return;
 		}
-		for(int i=start; i<n; i++) { //i=start로 시작하면 조합, 0으로 시작하면 순열
+		for(int i=0; i<n; i++) { //i=start로 시작하면 조합, 0으로 시작하면 순열
 			if(v[i]==0) { //!!
 				v[i] = 1; //visit 배열에 방문처리 //!!
 				a[count] = d[i];
