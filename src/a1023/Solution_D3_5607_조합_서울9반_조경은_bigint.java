@@ -1,6 +1,7 @@
 package a1023;
 
 import java.io.*;
+import java.math.BigInteger;
 
 //Fermat Little Theorem
 //a^p=a(mod p)
@@ -17,9 +18,8 @@ import java.io.*;
 //		-> 3%7
 
 
-public class Solution_D3_5607_조합_서울9반_조경은 {
+public class Solution_D3_5607_조합_서울9반_조경은_bigint {
 	public static int P=1234567891;
-	public static int T,N,R;
 	
 	public static long power(long x, long y, long p) {
 		long r=1L;
@@ -35,30 +35,26 @@ public class Solution_D3_5607_조합_서울9반_조경은 {
 		
 	}
 	
-	//페르마 소정리 이용
-	private static long modInverse(long a, long p) {
-		return power(a,p-2,p);
-	}
-	
-	public static long nCr(int n, int r, int p) {
-		if(r==0) return 1L;
-		
+	public static BigInteger nCr(int n, int r, int p) {
 		long[] fac=new long[n+1];
 		fac[0]=1;
 		for(int i=1; i<=n; i++)
 			fac[i]=fac[i-1]*i%p;
-		
-		//페르마
-		return (fac[n]*modInverse(fac[r],p)%p*modInverse(fac[n-r],p)%p)%p;
+		//remainder : 모듈연산
+		BigInteger P=BigInteger.valueOf(p);
+		BigInteger A=BigInteger.valueOf(fac[n]);
+		BigInteger B=BigInteger.valueOf(fac[r]).modInverse(P).remainder(P);
+		BigInteger C=BigInteger.valueOf(fac[n-r]).modInverse(P).remainder(P);
+		return A.multiply(B).multiply(C).remainder(P);
 	}
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		T = Integer.parseInt(br.readLine());
+		int T = Integer.parseInt(br.readLine());
 		for(int t=1; t<=T; t++) {
 			String[] s = br.readLine().split(" ");
-			N = Integer.parseInt(s[0]);
-			R = Integer.parseInt(s[1]);
+			int N = Integer.parseInt(s[0]);
+			int R = Integer.parseInt(s[1]);
 			
 			System.out.println("#" + t + " " +nCr(N,R,P));
 		}
