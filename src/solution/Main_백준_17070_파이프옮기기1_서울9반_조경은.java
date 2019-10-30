@@ -4,34 +4,50 @@ import java.io.*;
 import java.util.*;
 public class Main_백준_17070_파이프옮기기1_서울9반_조경은 {
 	public static int[][] arr;
-	public static int N, res;
-	public static boolean[][] v;
-	public static int[] di = {1,0,1};
-	public static int[] dj = {0,1,1};
-	public static int dir;
-	public static void dfs(int i, int j) {
+	public static int N, res, ni, nj;
+	public static int[] di = {0,1,1};
+	public static int[] dj = {1,1,0};
+	public static void dfs(int i, int j, int dir) {
 		if(i==N-1 && j==N-1) {
 			res++;
 			return;
 		}
-		for(int k=0; k<di.length; k++) {
-			int ni = i + di[k];
-			int nj = j + dj[k];
-			if(ni<N && nj<N && arr[ni][nj]==0) {
-				if(k==2) {
-					if(ni<0 || ni>=N || nj<0 || nj>=N || arr[ni-1][nj]==1 || arr[ni][nj-1]==1)
-						continue;
-				}
-				dfs(ni,nj);
-			}
+		
+		if(dir==0) {
+			ni = i+di[0];
+			nj = j+dj[0];
+			if(ni>=0 && ni<N && nj>=0 && nj<N && arr[ni][nj]==0) dfs(ni,nj,0);
+			ni = i+di[1];
+			nj = j+dj[1];
+			if(ni>=0 && ni<N && nj>=0 && nj<N && arr[ni][nj]==0 && arr[ni-1][nj]==0 && arr[ni][nj-1]==0) dfs(ni,nj,1);
 		}
+		else if(dir==1) {
+			ni = i+di[0];
+			nj = j+dj[0];
+			if(ni>=0 && ni<N && nj>=0 && nj<N && arr[ni][nj]==0) dfs(ni,nj,0);
+			ni = i+di[1];
+			nj = j+dj[1];
+			if(ni>=0 && ni<N && nj>=0 && nj<N && arr[ni][nj]==0 && arr[ni-1][nj]==0 && arr[ni][nj-1]==0) dfs(ni,nj,1);
+			ni = i+di[2];
+			nj = j+dj[2];
+			if(ni>=0 && ni<N && nj>=0 && nj<N && arr[ni][nj]==0) dfs(ni,nj,2);
+			
+		}
+		else if(dir==2) {
+			ni = i+di[2];
+			nj = j+dj[2];
+			if(ni>=0 && ni<N && nj>=0 && nj<N && arr[ni][nj]==0) dfs(ni,nj,2);
+			ni = i+di[1];
+			nj = j+dj[1];
+			if(ni>=0 && ni<N && nj>=0 && nj<N && arr[ni][nj]==0 && arr[ni-1][nj]==0 && arr[ni][nj-1]==0) dfs(ni,nj,1);
+		}
+		
 	}
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
 		arr = new int[N][N];
-		v = new boolean[N][N];
 		StringTokenizer st;
 		for(int i=0; i<N; i++) {
 			st = new StringTokenizer(br.readLine());
@@ -39,10 +55,8 @@ public class Main_백준_17070_파이프옮기기1_서울9반_조경은 {
 				arr[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
-		v[0][0] = true;
 		res = 0;
-		dir = 0;  
-		dfs(0,1);
+		dfs(0,1,0);
 		
 		System.out.println(res);
 	}

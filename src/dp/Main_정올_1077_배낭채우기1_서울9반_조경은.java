@@ -23,7 +23,6 @@ public class Main_정올_1077_배낭채우기1_서울9반_조경은 {
 		}
 		int[][] k = new int[N+1][W+1];
 		
-		
 		for(int i=1; i<=N; i++) {
             for(int j=1; j<=W; j++) {
                 if(w[i] > j) {
@@ -34,6 +33,12 @@ public class Main_정올_1077_배낭채우기1_서울9반_조경은 {
             }
         }
           
+		for(int i=1; i<=N; i++) {
+			for(int j=1; j<=W; j++) {
+				System.out.print(k[i][j] + " ");
+			}
+			System.out.println();
+		}
         System.out.println(k[N][W]);
 		
 	}
