@@ -35,6 +35,13 @@ public class Main_정올_2283_RGB마을_서울9반_조경은 {
 		int res = cost[N-1][0];
 		res = Math.min(res, cost[N-1][1]);
 		res = Math.min(res, cost[N-1][2]);
+		
+		for(int i=0; i<N; i++) {
+			for(int j=0; j<N; j++) {
+				System.out.print(cost[i][j] + " ");
+			}
+			System.out.println();
+		}
 		System.out.println(res);
 	}
 
