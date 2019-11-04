@@ -8,128 +8,186 @@ public class Solution_D4_6109_추억의2048게임_서울9반_조경은 {
 	public static int[][] res, arr;
 	public static String s;
 
-	public static void move(String dir) {
-		if(dir.equals("left")) {
-			for(int i=0; i<N; i++) {
-				int index=-1;
-				for(int j=0; j<N-1; j+=2) {
-					if(arr[i][j] == arr[i][j+1]&& arr[i][j]!=0) {
-						res[i][index++] = arr[i][j] + arr[i][j+1];
-						arr[i][j+1]=0;
-					}
-					else if(arr[i][j+1]==0) {
-						if(j+1==0) {
-							res[i][index++] = arr[i][j];
-							break;
-						}
-						arr[i][j+1]=arr[i][j];
-						arr[i][j]=0;
-						j--;
+	public static void left() {
+		for(int i=0; i<N; i++) {
+			ArrayList<Integer> list = new ArrayList<>();
+			int n1=0;
+			int n2=0;
+			for(int j=0; j<N; j++) {
+				if(n1 !=0 && n2 !=0) {
+					if(n1==n2) {
+						list.add(n1+n2);
+						n1=0;
+						n2=0;
 					}
 					else {
-						res[i][index++] = arr[i][j];
-						j--;
+						list.add(n1);
+						n1=n2;
+						n2=0;
 					}
 				}
-				if(N%2==1) {
-					res[i][index++] = arr[i][N-1];
+				if(arr[i][j]!=0 && n1==0) {
+					n1 = arr[i][j];
 				}
-			}
-			
-		}
-		else if(dir.equals("right")) {
-			for(int i=0; i<N; i++) {
-				int index=N;
-				for(int j=N-1; j>0; j-=2) {
-					if(arr[i][j] == arr[i][j-1]&& arr[i][j]!=0) {
-						res[i][index--] = arr[i][j] + arr[i][j-1];
-						arr[i][j-1]=0;
-					}
-					else if(arr[i][j-1]==0) {
-						if(j-1==0) {
-							res[i][index--] = arr[i][j];
-							break;
-						}
-						arr[i][j-1]=arr[i][j];
-						arr[i][j]=0;
-						j++;
+				else if(arr[i][j]!=0 && n1!=0) {
+					n2 = arr[i][j];
+				}
+				if(n1 !=0 && n2 !=0) {
+					if(n1==n2) {
+						list.add(n1+n2);
+						n1=0;
+						n2=0;
 					}
 					else {
-						res[i][index--] = arr[i][j];
-						j++;
+						list.add(n1);
+						n1=n2;
+						n2=0;
 					}
-				}
-				if(N%2==1) {
-					res[i][index--] = arr[i][0];
 				}
 			}
-			
-			
+			if(n1 !=0) list.add(n1);
+			for(int j=0; j<list.size(); j++) {
+				res[i][j] = list.get(j);
+			}
 		}
-		else if(dir.equals("up")) {
-			for(int i=0; i<N; i++) {
-				int index = 0;
-				for(int j=0; j<N-1; j+=2) {
-					if(arr[j][i] == arr[j+1][i]&& arr[j][i]!=0) {
-						res[index++][i] = arr[j][i] + arr[j+1][i];
-						arr[j][i]=0;
-						arr[j+1][i]=0;
-					}
-					else if(arr[j+1][i]==0) {
-						if(j+1==N-1) {
-							res[index++][i] = arr[j][i];
-							break;
-						}
-						arr[j+1][i]=arr[j][i];
-						arr[j][i]=0;
-						j--;
+	}
+
+	public static void right() {
+		for(int i=0; i<N; i++) {
+			ArrayList<Integer> list = new ArrayList<>();
+			int n1=0;
+			int n2=0;
+			for(int j=N-1; j>=0; j--) {
+				if(n1 !=0 && n2 !=0) {
+					if(n1==n2) {
+						list.add(n1+n2);
+						n1=0;
+						n2=0;
 					}
 					else {
-						res[index++][i] = arr[j][i];
-						j--;
+						list.add(n1);
+						n1=n2;
+						n2=0;
 					}
 				}
-				if(N%2==1) {
-					res[index++][i] = arr[N-1][i];
+				if(arr[i][j]!=0 && n1==0) {
+					n1 = arr[i][j];
+				}
+				else if(arr[i][j]!=0 && n1!=0) {
+					n2 = arr[i][j];
+				}
+				if(n1 !=0 && n2 !=0) {
+					if(n1==n2) {
+						list.add(n1+n2);
+						n1=0;
+						n2=0;
+					}
+					else {
+						list.add(n1);
+						n1=n2;
+						n2=0;
+					}
 				}
 			}
-			
+			if(n1 !=0) list.add(n1);
+			int index=N;
+			for(int j=0; j<list.size(); j++) {
+				res[i][--index] = list.get(j);
+			}
 		}
-		else if(dir.equals("down")) {
+	}
+
+	public static void up() {
+		for(int j=0; j<N; j++) {
+			ArrayList<Integer> list = new ArrayList<>();
+			int n1=0;
+			int n2=0;
+			for(int i=0; i<N; i++) {
+				if(n1 !=0 && n2 !=0) {
+					if(n1==n2) {
+						list.add(n1+n2);
+						n1=0;
+						n2=0;
+					}
+					else {
+						list.add(n1);
+						n1=n2;
+						n2=0;
+					}
+				}
+				if(arr[i][j]!=0 && n1==0) {
+					n1 = arr[i][j];
+				}
+				else if(arr[i][j]!=0 && n1!=0) {
+					n2 = arr[i][j];
+				}
+				if(n1 !=0 && n2 !=0) {
+					if(n1==n2) {
+						list.add(n1+n2);
+						n1=0;
+						n2=0;
+					}
+					else {
+						list.add(n1);
+						n1=n2;
+						n2=0;
+					}
+				}
+			}
+			if(n1 !=0) list.add(n1);
+			for(int i=0; i<list.size(); i++) {
+				res[i][j] = list.get(i);
+			}
+		}
+	}
+
+	public static void down() {
+		for(int j=0; j<N; j++) {
+			ArrayList<Integer> list = new ArrayList<>();
+			int n1=0;
+			int n2=0;
 			for(int i=N-1; i>=0; i--) {
-				int index = N;
-				for(int j=N-1; j>0; j-=2) {
-					if(arr[j][i] == arr[j-1][i] && arr[j][i]!=0) {
-						res[--index][i] = arr[j][i] + arr[j-1][i];
-						arr[j-1][i]=0;
-					}
-					else if(arr[j-1][i]==0) {
-						if(j-1==0) {
-							res[--index][i] = arr[j][i];
-							break;
-						}
-						arr[j-1][i]=arr[j][i];
-						arr[j][i]=0;
-						j++;
+				if(n1 !=0 && n2 !=0) {
+					if(n1==n2) {
+						list.add(n1+n2);
+						n1=0;
+						n2=0;
 					}
 					else {
-						res[--index][i] = arr[j][i];
-						j++;
+						list.add(n1);
+						n1=n2;
+						n2=0;
 					}
 				}
-				if(N%2==1) {
-					res[--index][i] = arr[0][i];
+				if(arr[i][j]!=0 && n1==0) {
+					n1 = arr[i][j];
+				}
+				else if(arr[i][j]!=0 && n1!=0) {
+					n2 = arr[i][j];
+				}
+				if(n1 !=0 && n2 !=0) {
+					if(n1==n2) {
+						list.add(n1+n2);
+						n1=0;
+						n2=0;
+					}
+					else {
+						list.add(n1);
+						n1=n2;
+						n2=0;
+					}
 				}
 			}
-			
-			
+			if(n1 !=0) list.add(n1);
+			int index = N;
+			for(int i=0; i<list.size(); i++) {
+				res[--index][j] = list.get(i);
+			}
 		}
-		
-		
 	}
 
 	public static void main(String[] args) throws Exception {
-		System.setIn(new FileInputStream("res/input_d4_6109.txt"));
+		//System.setIn(new FileInputStream("res/input_d4_6109.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
 		int T = Integer.parseInt(br.readLine());
@@ -145,16 +203,24 @@ public class Solution_D4_6109_추억의2048게임_서울9반_조경은 {
 					arr[i][j] = Integer.parseInt(st.nextToken());
 				}
 			}
-			move(s);
+
+			if (s.equals("left"))
+				left();
+			else if (s.equals("right"))
+				right();
+			else if (s.equals("up"))
+				up();
+			else if (s.equals("down"))
+				down();
 
 			System.out.println("#" + t);
-			for(int i=0; i<N; i++) {
-				for(int j=0; j<N; j++) {
+			for (int i = 0; i < N; i++) {
+				for (int j = 0; j < N; j++) {
 					System.out.print(res[i][j] + " ");
 				}
 				System.out.println();
 			}
-			
+
 		}
 
 	}
