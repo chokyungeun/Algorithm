@@ -34,7 +34,7 @@ public class Solution_D9_5644_무선충전_서울9반_조경은 {
 	
 	
 	public static void main(String args[]) throws Exception {
-		//System.setIn(new FileInputStream("res/input_d9_5644.txt"));
+		System.setIn(new FileInputStream("res/input_d9_5644.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
 		int T = Integer.parseInt(br.readLine());
@@ -73,18 +73,14 @@ public class Solution_D9_5644_무선충전_서울9반_조경은 {
 					return o1[3]-o2[3];
 				}
 			});
+			
+			
 			for(int i=0; i<BC; i++) {
 				v = new boolean[10][10];
 				range(BCinfo.get(i)[0],BCinfo.get(i)[1],BCinfo.get(i)[2],i);
 			}
 			
-			for(int i=0; i<10; i++) {
-				for(int j=0; j<10; j++) {
-					System.out.print(map[i][j] + "    ");
-				}
-				System.out.println();
-			}
-			System.out.println();
+		
 			ares=0;
 			bres=0;
 			int ai=0;
@@ -95,16 +91,18 @@ public class Solution_D9_5644_무선충전_서울9반_조경은 {
 			for(int i=0; i<=M; i++) {
 				int num=0;
 				for(int k=0; k<map[bi][bj].size(); k++) {
+					//겹치는게 있을 때
 					if(map[ai][aj].contains(map[bi][bj].get(k))) {
 						num++;
-						
+						//둘다 하나의 영역에만 속해있는데 겹칠때(나눠가짐)
 						if(map[ai][aj].size()==1 && map[bi][bj].size()==1) {
 							ares += BCinfo.get(map[ai][aj].get(0))[3]/2;
 							bres += BCinfo.get(map[bi][bj].get(0))[3]/2;
 						}
-						else if(map[ai][aj].size()==1) {
+						//A가 한개의 영역에만 속해있을 때
+						else if(map[ai][aj].size()==1 && map[bi][bj].size()!=1) {
 							ares+=BCinfo.get(map[ai][aj].get(0))[3];
-							if(map[bi][bj].size()-1 == map[ai][aj].get(0)) {
+							if(map[bi][bj].get(map[bi][bj].size()-1) == map[ai][aj].get(0)) {
 								bres+=BCinfo.get(map[bi][bj].get(map[bi][bj].size()-2))[3];
 							}
 							else {
@@ -112,7 +110,8 @@ public class Solution_D9_5644_무선충전_서울9반_조경은 {
 							}
 							
 						}
-						else if(map[bi][bj].size()==1) {
+						//B가 한개의 영역에만 속해있을때
+						else if(map[bi][bj].size()==1 && map[ai][aj].size()!=1) {
 							bres+=BCinfo.get(map[bi][bj].get(0))[3];
 							if(map[ai][aj].get(map[ai][aj].size()-1) == map[bi][bj].get(0)) {
 								ares+=BCinfo.get(map[ai][aj].get(map[ai][aj].size()-2))[3];
@@ -121,6 +120,7 @@ public class Solution_D9_5644_무선충전_서울9반_조경은 {
 								ares+=BCinfo.get(map[ai][aj].get(map[ai][aj].size()-1))[3];
 							}
 						}
+						//A와 B모두 두개 이상의 영역에 속해있을 때
 						else {
 							if(map[ai][aj].get(map[ai][aj].size()-1)==map[bi][bj].get(map[bi][bj].size()-1)) {
 								if(map[ai][aj].get(map[ai][aj].size()-2)>map[bi][bj].get(map[bi][bj].size()-2)) {
@@ -144,6 +144,7 @@ public class Solution_D9_5644_무선충전_서울9반_조경은 {
 					
 					
 				}
+				//겹치는게 없을때
 				if(num==0) {
 					if(map[ai][aj].size()!=0) {
 						ares+=BCinfo.get(map[ai][aj].get(map[ai][aj].size()-1))[3];
@@ -152,7 +153,6 @@ public class Solution_D9_5644_무선충전_서울9반_조경은 {
 						bres+=BCinfo.get(map[bi][bj].get(map[bi][bj].size()-1))[3];
 					}
 				}
-				System.out.println(i + "     " + ares + " " + bres);
 				if(i==M) {
 					break;
 				}
