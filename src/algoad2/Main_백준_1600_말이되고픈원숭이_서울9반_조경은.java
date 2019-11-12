@@ -4,46 +4,44 @@ import java.io.*;
 import java.util.*;
 
 public class Main_백준_1600_말이되고픈원숭이_서울9반_조경은 {
-	public static int K, W, H, res, temp;
-	public static int[][] arr,memo;
+	public static int K, W, H;
+	public static int[][] arr;
 	public static int[] di = { -1, 1, 0, 0 };
 	public static int[] dj = { 0, 0, -1, 1 };
 	public static int[] ndi = { -1, -2, -2, -1, 1, 2, 2, 1 };
 	public static int[] ndj = { -2, -1, 1, 2, 2, 1, -1, -2 };
-	public static boolean[][] v;
+	public static boolean[][][] v;
 
-	public static void bfs(int i, int j) {
+	public static int bfs() {
 		Queue<int[]> q = new LinkedList<>();
-		q.offer(new int[] { i, j, 0 });
+		q.offer(new int[] { 0, 0, K, 0 });
 
 		while (!q.isEmpty()) {
 			int[] curr = q.poll();
-			int siz = q.size();
-			if (K > 0) {
-				for (int k = 0; k < ndi.length; k++) {
-					int ni = curr[0] + ndi[k];
-					int nj = curr[1] + ndj[k];
-					if (ni >= 0 && ni < H && nj >= 0 && nj < W && arr[ni][nj] != 1) {
-						v[ni][nj] = true;
-						arr[ni][nj] = curr[2] + 1;
-						q.offer(new int[] { ni, nj, curr[2] + 1 });
-					}
-				}
+
+			if (curr[0] == H - 1 && curr[1] == W - 1) {
+				return curr[3];
 			}
+
 			for (int k = 0; k < di.length; k++) {
 				int ni = curr[0] + di[k];
 				int nj = curr[1] + dj[k];
-				if (ni >= 0 && ni < H && nj >= 0 && nj < W && arr[ni][nj] != 1 && !v[ni][nj]) {
-					if (ni == H - 1 && nj == W - 1) {
-						temp = curr[2] + 1;
-						return;
+				if (ni >= 0 && ni < H && nj >= 0 && nj < W && arr[ni][nj] != 1 && !v[curr[3]][ni][nj]) {
+					v[curr[3]][ni][nj] = true;
+					q.offer(new int[] { ni, nj, curr[2] + 1, curr[3] + 1 });
+				}
+			}
+			if (curr[2] > 0) {
+				for (int k = 0; k < 8; k++) {
+					int ni = curr[0] + ndi[k];
+					int nj = curr[1] + ndj[k];
+					if (ni >= 0 && ni < H && nj >= 0 && nj < W && arr[ni][nj] != 1) {
+						q.offer(new int[] { ni, nj, curr[2] - 1, curr[3] + 1 });
 					}
-					v[ni][nj] = true;
-					arr[ni][nj] = curr[2] + 1;
-					q.offer(new int[] { ni, nj, curr[2] + 1 });
 				}
 			}
 		}
+		return -1;
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -53,28 +51,15 @@ public class Main_백준_1600_말이되고픈원숭이_서울9반_조경은 {
 		W = Integer.parseInt(st.nextToken());
 		H = Integer.parseInt(st.nextToken());
 		arr = new int[H][W];
-		memo = new int[H][W];
-		v = new boolean[H][W];
+		v = new boolean[201][H][W];
 		for (int i = 0; i < H; i++) {
 			st = new StringTokenizer(br.readLine());
 			for (int j = 0; j < W; j++) {
 				arr[i][j] = Integer.parseInt(st.nextToken());
 			}
-			Arrays.fill(memo, Integer.MAX_VALUE);
 		}
 
-		bfs(0, 0);
-		if(temp==0) {
-			temp=-1;
-		}
-		/*for (int i = 0; i < H; i++) {
-			for (int j = 0; j < W; j++) {
-				System.out.print(arr[i][j] + " ");
-			}
-			System.out.println();
-		}*/
-
-		System.out.println(temp);
+		System.out.println(bfs());
 	}
 
 }
