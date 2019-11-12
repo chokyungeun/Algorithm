@@ -14,20 +14,13 @@ public class Main_백준_15663_N과M9_서울9반_조경은 {
 			//System.out.println(Arrays.toString(a));
 			boolean flag2 = false;
 			for(int i=0; i<list.size(); i++) {
-				boolean flag = false;
-				for(int j=0; j<list.get(i).length; j++) {
-					if(list.get(i)[0]!= a[j]) {
-						flag = true;
-						break;
-					}
-				}
-				if(!flag) {
-					flag2 = true;
+				if(list.get(i).equals(a)) {
+					flag2=true;
 					break;
 				}
 			}
 			if(!flag2) {
-				System.out.println("yesy");
+				System.out.println("yes");
 				list.add(a);
 			}
 			System.out.println(list.get(0)[0]);
