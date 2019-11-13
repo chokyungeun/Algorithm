@@ -3,7 +3,7 @@ package a1113;
 import java.io.*;
 import java.util.*;
 
-public class Main_정올_1824_스도쿠_서울_9반_조경은 {
+public class Main_정올_1824_스도쿠_서울9반_조경은 {
 	public static boolean available(int[][] a, int r, int c, int target) {
 		for(int k=0; k<a.length; k++) {
 			if(a[k][c]==target || a[r][k]==target)
