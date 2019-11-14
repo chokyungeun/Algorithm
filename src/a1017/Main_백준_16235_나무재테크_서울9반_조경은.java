@@ -11,7 +11,6 @@ public class Main_백준_16235_나무재테크_서울9반_조경은 {
 	public static ArrayList<Integer>[][] tinfo;
 	
 	public static void spring() {
-		
 		for(int i=0; i<N; i++) {
 			for(int j=0; j<N; j++) {
 				int sum=0;
