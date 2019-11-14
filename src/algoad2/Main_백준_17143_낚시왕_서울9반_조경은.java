@@ -11,7 +11,8 @@ public class Main_백준_17143_낚시왕_서울9반_조경은 {
 	
 	public static void eatShark() {
 		for(int i=0; i<slist.size(); i++) {
-			if(shark[slist.get(i)[0]][slist.get(i)[1]].size()==0) {
+			
+			if(shark[slist.get(i)[0]][slist.get(i)[1]]==null) {
 				shark[slist.get(i)[0]][slist.get(i)[1]].add(slist.get(i));
 			}
 			else {
@@ -29,6 +30,7 @@ public class Main_백준_17143_낚시왕_서울9반_조경은 {
 	
 	public static void moveShark() {
 		for(int i=0; i<slist.size(); i++) {
+			//System.out.println(slist.get(i)[0] + " " + slist.get(i)[1]);
 			int ni = slist.get(i)[0];
 			int nj = slist.get(i)[1];
 			for(int j=0; j<slist.get(i)[2]; j++) {
@@ -38,7 +40,7 @@ public class Main_백준_17143_낚시왕_서울9반_조경은 {
 				}
 				else {
 					if(nj==0) slist.get(i)[3]=2;
-					if(nj==C-1) slist.get(i)[2]=3;
+					if(nj==C-1) slist.get(i)[3]=3;
 				}
 				ni += di[slist.get(i)[3]];
 				nj += dj[slist.get(i)[3]];
@@ -46,6 +48,7 @@ public class Main_백준_17143_낚시왕_서울9반_조경은 {
 			shark[slist.get(i)[0]][slist.get(i)[1]].remove(0);
 			slist.get(i)[0]=ni;
 			slist.get(i)[1]=nj;
+			//System.out.println(slist.get(i)[0] + " " + slist.get(i)[1]);
 		}
 	}
 	
@@ -79,9 +82,18 @@ public class Main_백준_17143_낚시왕_서울9반_조경은 {
 			for(int j=0; j<R; j++) {
 				if(shark[j][i].size()!=0) {
 					res+=shark[j][i].get(0)[2];
+					for(int k=0; k<slist.size(); k++) {
+						if(slist.get(k)[0]==j && slist.get(k)[1]==i) {
+							slist.remove(k);
+							break;
+						}
+					}
+					//slist.remove((Object)shark[j][i].get(0)); //어떻게지워...?
+					shark[j][i]=null;
 					break;
 				}
 			}
+			
 			moveShark();
 			eatShark();
 		}

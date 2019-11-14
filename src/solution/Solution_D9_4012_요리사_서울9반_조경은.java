@@ -16,16 +16,21 @@ public class Solution_D9_4012_요리사_서울9반_조경은 {
 				b+=arr[B[i]][B[j]];
 			}
 		}
-		res = Math.min(res, (a-b));
+		res = Math.min(res, Math.abs(a-b));
 	}
 	
 	public static void permComb(int start, int count) {
 		if(count==N/2) {
 			int idx=-1;
+			int x=0;
 			for(int i=0; i<N; i++) {
-				if(!Arrays.asList(A).contains(Integer.toString(i))) {
-					B[++idx]=i;
+				x=0;
+				for(int j=0; j<A.length; j++) {
+					if(A[j]==i) {
+						x++;
+					}
 				}
+				if(x==0) B[++idx]=i;
 			}
 			calc();
 			return;
