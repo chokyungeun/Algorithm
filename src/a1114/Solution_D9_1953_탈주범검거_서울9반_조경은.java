@@ -5,24 +5,43 @@ import java.util.*;
 public class Solution_D9_1953_탈주범검거_서울9반_조경은 {
 	public static int N,M,R,C,L;
 	public static int[][] map;
-	public static int[][] di= {{},{-1,1,0,0},{-1,1},{0,0},{-1,0},{1,0},{1,0},{-1,0}};
-	public static int[][] dj= {{},{0,0,-1,1},{0,0},{-1,1},{0,1},{0,1},{0,-1},{0,-1}};
+	public static int[][] ddi= {{},{-1,1,0,0},{-1,1},{0,0},{-1,0},{1,0},{1,0},{-1,0}};
+	public static int[][] ddj= {{},{0,0,-1,1},{0,0},{-1,1},{0,1},{0,1},{0,-1},{0,-1}};
 	public static boolean[][] v;
 	
-	public static void bfs(int i, int j) {
+	public static void bfs(int i, int j) {		
 		Queue<int[]> q = new LinkedList<>();
 		v[i][j]=true;
 		q.offer(new int[] {i,j,1});
 		while(!q.isEmpty()) {
 			int[] curr = q.poll();
-			for(int k=0; k<di[map[curr[0]][curr[1]]].length; k++){
-				int ni = curr[0]+di[map[curr[0]][curr[1]]][k];
-				int nj = curr[1]+dj[map[curr[0]][curr[1]]][k];
+			for(int k=0; k<ddi[map[curr[0]][curr[1]]].length; k++){
+				int ni = curr[0]+ddi[map[curr[0]][curr[1]]][k];
+				int nj = curr[1]+ddj[map[curr[0]][curr[1]]][k];
 				if(ni>=0 && ni<N && nj>=0 && nj<M && !v[ni][nj] && map[ni][nj]!=0) {
-					
-					v[ni][nj]=true;
-					if(curr[2]<L) {
-						q.offer(new int[] {ni,nj,curr[2]+1});
+					if(curr[0]-1==ni && (map[ni][nj]==1 || map[ni][nj]==2 ||map[ni][nj]==5 ||map[ni][nj]==6)) {
+						v[ni][nj]=true;
+						if(curr[2]<L-1) {
+							q.offer(new int[] {ni,nj,curr[2]+1});
+						}
+					}
+					else if(curr[0]+1==ni && (map[ni][nj]==1 || map[ni][nj]==2 ||map[ni][nj]==4 ||map[ni][nj]==7)) {
+						v[ni][nj]=true;
+						if(curr[2]<L-1) {
+							q.offer(new int[] {ni,nj,curr[2]+1});
+						}
+					}
+					else if(curr[1]-1==nj && (map[ni][nj]==1 || map[ni][nj]==3 ||map[ni][nj]==4 ||map[ni][nj]==5)) {
+						v[ni][nj]=true;
+						if(curr[2]<L-1) {
+							q.offer(new int[] {ni,nj,curr[2]+1});
+						}
+					}
+					else if(curr[1]+1==nj && (map[ni][nj]==1 || map[ni][nj]==3 ||map[ni][nj]==6 ||map[ni][nj]==7)) {
+						v[ni][nj]=true;
+						if(curr[2]<L-1) {
+							q.offer(new int[] {ni,nj,curr[2]+1});
+						}
 					}
 				}
 			}
@@ -50,17 +69,19 @@ public class Solution_D9_1953_탈주범검거_서울9반_조경은 {
 					map[i][j] = Integer.parseInt(st.nextToken());
 				}
 			}
-			
-			bfs(R,C);
 			int res=0;
-			for(int i=0; i<N; i++) {
-				for(int j=0; j<M; j++) {
-					if(v[i][j]) res++;
-					System.out.print(v[i][j] + " ");
-				}
-				System.out.println();
+			if(L==1) {
+				res=1;
 			}
-			System.out.println();
+			else {
+				bfs(R,C);
+				for(int i=0; i<N; i++) {
+					for(int j=0; j<M; j++) {
+						if(v[i][j]) res++;
+					}
+				}
+			}
+			
 			System.out.println("#" + t + " " + res);
 		}
 		
