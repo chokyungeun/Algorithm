@@ -16,7 +16,7 @@ public class Main_백준_3109_빵집_서울9반_조경은 {
 			return true;
 		}
 		v[i][j] = true;
-		for(int k=0; k<di.length; k++) {
+		for(int k=0; k<di.length; k++) { 
 			int ni = i + di[k];
 			int nj = j + dj[k];
 			if(ni>=0 && ni<R && nj<C && arr[ni][nj] != 'x' && !v[ni][nj]) {
