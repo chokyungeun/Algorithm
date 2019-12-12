@@ -22,6 +22,9 @@ public class PermComb {
 	}
 
 	private static void func() {
+		// TODO Auto-generated method stub
 		
 	}
+
+	
 }
