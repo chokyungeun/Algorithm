@@ -8,6 +8,19 @@ public class Main_백준_17822_원판돌리기_서울9반_조경은 {
 	public static int[][] c;
 	public static ArrayList<int[]> list;
 	
+	public static void rot(int num, int dir, int k) {
+		for(int i=0; i<N; i++) {
+			if((i+1)%num==0) {
+				if(dir==0) {
+					
+				}
+				else {
+					
+				}
+			}
+		}
+	}
+	
 	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
@@ -24,9 +37,12 @@ public class Main_백준_17822_원판돌리기_서울9반_조경은 {
 		}
 		for(int i=0; i<T; i++) {
 			st = new StringTokenizer(br.readLine());
-			list.add(new int[] {Integer.parseInt(st.nextToken())-1,Integer.parseInt(st.nextToken()),Integer.parseInt(st.nextToken())});
+			list.add(new int[] {Integer.parseInt(st.nextToken()),Integer.parseInt(st.nextToken()),Integer.parseInt(st.nextToken())});
 		}
 		
+		for(int i=0; i<T; i++) {
+			rot(list.get(i)[0], list.get(i)[1], list.get(i)[2]);
+		}
 		
 		
 
