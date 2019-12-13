@@ -22,8 +22,7 @@ public class NextPermutationTest {
 		
 		//2. i-1위치 값이랑 교환할 j값 찾기(i-1 위치 뒤쪽에서)
 		int j=N-1;
-		while(numbers[i-1]>=numbers[j]) 
-;
+		while(numbers[i-1]>=numbers[j]) ;
 		
 		//3. i-1위치 값하고 j위치값 교환
 		int t = numbers[i-1];
