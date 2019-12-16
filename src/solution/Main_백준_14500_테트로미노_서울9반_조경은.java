@@ -9,42 +9,45 @@ public class Main_백준_14500_테트로미노_서울9반_조경은 {
 	public static int[] di = {-1,1,0,0};
 	public static int[] dj = {0,0,-1,1};
 
-	public static void one(int i, int j) {
-		int index1=0;
-		int index2=0;
-		int index3=0;
-		int index4=0;
-		
-		for(int k=0; k<4; k++) {
-			for(int x=0; x<4; x++) {
-				int ni = i+di[k];
-				int nj = j+dj[k];
-				if(ni<0 || ni>=N || nj<0 || nj>=M) {
-					break;
-				}
-				else {
-					
-				}
+	public static void one() {
+		int temp=0;
+		for(int i=0; i<N; i++) {
+			for(int j=0; j<M-4; j++) {
+				temp += map[i][j];
+			}
+			max = Math.max(max, temp);
+			temp=0;
+			for(int j=0; j<M-4; j++) {
+				temp+=map[j][i];
+			}
+			max = Math.max(max, temp);
+			temp=0;
+		}
+	}
+
+	public static void two() {
+		int temp=0;
+		for(int i=0; i<N-1; i++) {
+			for(int j=0; j<N-1; j++) {
+				temp+=map[i][j];
+				temp+=map[i][j+1];
+				temp+=map[i+1][j];
+				temp+=map[i][j+1];
+				max = Math.max(max, temp);
+				temp=0;
 			}
 		}
-		
-		
-		
 	}
 
-	public static void two(int i, int j) {
+	public static void three() {
 
 	}
 
-	public static void three(int i, int j) {
+	public static void four() {
 
 	}
 
-	public static void four(int i, int j) {
-
-	}
-
-	public static void five(int i, int j) {
+	public static void five() {
 
 	}
 
@@ -61,15 +64,11 @@ public class Main_백준_14500_테트로미노_서울9반_조경은 {
 			}
 		}
 		max=0;
-		for(int i=0; i<N; i++) {
-			for(int j=0; j<N; j++) {
-				one(i,j);
-				two(i,j);
-				three(i,j);
-				four(i,j);
-				five(i,j);
-			}
-		}
+		one();
+		two();
+		three();
+		four();
+		five();
 		System.out.println(max);
 	}
 
