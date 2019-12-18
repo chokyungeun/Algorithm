@@ -17,9 +17,9 @@ public class FloydWarshallTest {
 			{INF, -3,  3,  1,  0}
 		};
 		
-		for(int k=0; k<N; k++) {
-			for(int i=0; i<N; i++) {
-				for(int j=0; j<N; j++) {
+		for(int k=0; k<N; k++) { //경유지
+			for(int i=0; i<N; i++) { //출발지
+				for(int j=0; j<N; j++) { //도착지
 					d[i][j]=Math.min(d[i][k]+d[k][j], d[i][j]);
 				}
 			}
