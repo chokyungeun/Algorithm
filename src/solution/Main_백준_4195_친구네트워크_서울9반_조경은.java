@@ -1,4 +1,4 @@
-package com.ssafy;
+package solution;
 import java.io.*;
 import java.util.*;
 
