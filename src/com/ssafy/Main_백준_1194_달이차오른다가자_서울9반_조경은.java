@@ -10,45 +10,30 @@ public class Main_백준_1194_달이차오른다가자_서울9반_조경은 {
 	public static int[] di = {-1,1,0,0};
 	public static int[] dj = {0,0,-1,1};
 	
-	public static void bfs() {
+	public static int bfs() {
 		
 		while(!q.isEmpty()) {
 			int[] curr = q.poll();
-			//System.out.println(curr[0] + " " + curr[1]);
+			if(map[curr[0]][curr[1]]=='1') return curr[3];
 			for(int k=0; k<di.length; k++) {
 				int ni = curr[0]+di[k];
 				int nj = curr[1]+dj[k];
+				int nk = curr[2];
 				if(ni>=0 && ni<N && nj>=0 && nj<M &&  map[ni][nj]!='#') {
-					if(map[ni][nj]=='1') {
-						res = curr[3]+1;
-						return;
-					}
-					else if(map[ni][nj]>='a' && map[ni][nj]<='f') {
-						int[] temp = new int[curr.length+1];
-						curr[2] |= (1<<(map[ni][nj]-'a'));
-						
-						temp[0] = ni;
-						temp[1] = nj;
-						temp[3]++;
-						
-						v[temp[2]][ni][nj] = true;
-						q.offer(temp);
+					if(map[ni][nj]>='a' && map[ni][nj]<='f') {
+						nk |= (1<<(map[ni][nj]-'a'));
 					}
 					else if(map[ni][nj]>='A' && map[ni][nj]<='F') {
-						if((curr[2]&(1<<(map[ni][nj]-'A')))==0) continue;
-						
+						if((nk&(1<<(map[ni][nj]-'A')))==0) continue;
 					}
-					else {
-						v[curr[2]][ni][nj]=true;
-						int[] temp = curr;
-						temp[0] = ni;
-						temp[1] = nj;
-						temp[3]++;
-						q.offer(temp);
+					if(!v[nk][ni][nj]) {
+						v[nk][ni][nj] = true;
+						q.offer(new int[] {ni,nj,nk,curr[3]+1});
 					}
 				}
 			}
 		}
+		return -1;
 	}
 	
 	public static void main(String[] args) throws Exception {
@@ -70,9 +55,8 @@ public class Main_백준_1194_달이차오른다가자_서울9반_조경은 {
 			}
 		}
 		
-		bfs();
-		if(res==0) System.out.println(-1);
-		else System.out.println(res);
+		System.out.println(bfs());
+		
 		
 	}
 

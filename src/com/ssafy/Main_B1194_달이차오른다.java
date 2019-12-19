@@ -48,7 +48,6 @@ public class Main_B1194_달이차오른다 {
 		int temp[],nx,ny,nk=0;
 		while(!queue.isEmpty()) {
 			temp = queue.poll();
-			
           	// 출구이면
 			if(map[temp[0]][temp[1]] == '1') return temp[3];
 			
@@ -71,6 +70,7 @@ public class Main_B1194_달이차오른다 {
 				if(!visited[nx][ny][nk]) {
 					visited[nx][ny][nk] = true;
 					queue.offer(new int[] {nx,ny,nk,temp[3]+1});
+					System.out.println(nx + " " + ny + " " +  nk + " " + temp[3]+1);
 				}
 			}// end for(direction)
 		}// end while(queue)
