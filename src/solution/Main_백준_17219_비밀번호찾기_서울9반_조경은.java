@@ -2,7 +2,7 @@ package solution;
 import java.io.*;
 import java.util.*;
 
-public class Main_17219_비밀번호찾기_서울9반_조경은 {
+public class Main_백준_17219_비밀번호찾기_서울9반_조경은 {
 	public static int N,M;
 	
 	public static void main(String[] args) throws Exception {

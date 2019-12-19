@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Solution_4008_숫자만들기_서울9반_조경은 {
+public class Solution_D9_4008_숫자만들기_서울9반_조경은 {
 	public static int N, max, min, tot, res, plus, minus, mul, div;
 	public static int[] num;
 	public static char[] op;
