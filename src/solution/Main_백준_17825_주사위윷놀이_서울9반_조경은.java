@@ -79,12 +79,11 @@ public class Main_백준_17825_주사위윷놀이_서울9반_조경은 {
 			}
 			else {
 				if(curr[0]==4) {
-					curr[0]
 				}
 			}
 			
 		}
-		else if()
+	
 	}
 }
 
