@@ -4,120 +4,180 @@ import java.io.*;
 import java.util.*;
 
 public class Main_백준_1938_통나무옮기기_서울9반_조경은 {
-	public static int N,res;
+	public static int N, res;
+	public static tongtree heretree;
 	public static char[][] map;
-	public static int[][][] v;
-	public static ArrayList<int[]> tree, here, list;
-	public static int[] di = {-1,1,0,0};
-	public static int[] dj = {0,0,-1,1};
-	
-	public static boolean move(int dir) {
-		for(int i=0; i<list.size(); i++) {
-			if(list.get(i)[0]+di[dir]<0 || list.get(i)[0]+di[dir]>=N || list.get(i)[1] + dj[dir] <0 || list.get(i)[1] + dj[dir] >=N || map[list.get(i)[0]+di[dir]][list.get(i)[1] + dj[dir]] == 1) {
-				return false;
-			}
+	public static int[][] v;
+	public static int[] di = { -1, -1, -1, 0, 1, 1, 1, 0 };
+	public static int[] dj = { -1, 0, 1, 1, 1, 0, -1, -1 };
+//방문처리!!
+	public static class tongtree {
+		int x1;
+		int y1;
+		int x2;
+		int y2;
+		int x3;
+		int y3;
+		int dir;
+		int count;
+
+		public tongtree(int x1, int y1, int x2, int y2, int x3, int y3, int dir, int count) {
+			this.x1 = x1;
+			this.y1 = y1;
+			this.x2 = x2;
+			this.y2 = y2;
+			this.x3 = x3;
+			this.y3 = y3;
+			this.dir = dir;
+			this.count = count;
 		}
-		for(int i=0; i<list.size(); i++) {
-			list.get(i)[0] += di[dir];
-			list.get(i)[1] += dj[dir];
-		}
-		res++;
-		return true;
+
 	}
-	
-	public static boolean rotate() {
-		if(list.get(0)[0] == list.get(1)[0]) { //가로
-			for(int i=list.get(1)[0]-1; i<list.get(1)[0]+2; i++) {
-				for(int j=list.get(1)[1]-1; j<list.get(1)[1]+2; j++) {
-					if(i<0 || i>=N || j<0 || j>=N || map[i][j]==1) {
-						return false;
-					}
-				}
-			}
-			list.get(0)[0] = list.get(1)[0]-1;
-			list.get(0)[1] = list.get(1)[1];
-			list.get(2)[0] = list.get(1)[0]+1;
-			list.get(2)[1] = list.get(1)[1];
-			res++;
-			return true;
+
+	public static tongtree up(tongtree t) {
+		tongtree nt = new tongtree(t.x1, t.y1, t.x2, t.y2, t.x3, t.y3, t.dir, t.count);
+		if (t.x1 - 1 >= 0 && map[t.x1 - 1][t.y1] != '1') {
+			nt = new tongtree(t.x1 - 1, t.y1, t.x2 - 1, t.y2, t.x3 - 1, t.y3, t.dir, t.count);
 		}
-		else {
-			for(int i=list.get(1)[0]-1; i<list.get(1)[0]+2; i++) {
-				for(int j=list.get(1)[1]-1; j<list.get(1)[1]+2; j++) {
-					if(i<0 || i>=N || j<0 || j>=N || map[i][j]==1) {
-						return false;
-					}
-				}
-			}
-			list.get(0)[0] = list.get(1)[0];
-			list.get(0)[1] = list.get(1)[1]-1;
-			list.get(2)[0] = list.get(1)[0];
-			list.get(2)[1] = list.get(1)[0]+1;
-			res++;
-			return true;
-		}
+		return nt;
+
 	}
-	
-	public static void bfs() {
-		Queue<ArrayList<int[]>> q = new LinkedList<>();
-		tree.add(new int[] {0});
-		q.offer(tree);
-		
-		while(!q.isEmpty()) {
-			list = new ArrayList<>();
-			ArrayList<int[]> temp = new ArrayList<>();
-			temp = q.poll();
-			int index=0;
-			for(int i=0; i<3; i++) {
-				if(temp.get(i)[0]==here.get(i)[0] && temp.get(i)[1] == here.get(i)[1]) {
-					index++;
-				}
+
+	public static tongtree down(tongtree t) {
+		tongtree nt = new tongtree(t.x1, t.y1, t.x2, t.y2, t.x3, t.y3, t.dir, t.count);
+		if (t.x3 + 1 < N && map[t.x3 + 1][t.y3] != '1') {
+			nt = new tongtree(t.x1 + 1, t.y1, t.x2 + 1, t.y2, t.x3 + 1, t.y3, t.dir, t.count);
+		}
+		return nt;
+	}
+
+	public static tongtree left(tongtree t) {
+		tongtree nt = new tongtree(t.x1, t.y1, t.x2, t.y2, t.x3, t.y3, t.dir, t.count);
+		if (t.y1 - 1 >= 0 && map[t.x1][t.y1 - 1] != '1' && map[t.x2][t.y2 - 1] != '1' && map[t.x3][t.y3 - 1] != '1') {
+			nt = new tongtree(t.x1, t.y1 - 1, t.x2, t.y2 - 1, t.x3, t.y3 - 1, t.dir, t.count);
+
+		}
+		return nt;
+	}
+
+	public static tongtree right(tongtree t) {
+		tongtree nt = new tongtree(t.x1, t.y1, t.x2, t.y2, t.x3, t.y3, t.dir, t.count);
+		if (t.y3 + 1 < N && map[t.x3][t.y3 + 1] != '1' && map[t.x2][t.y2 + 1] != '1' && map[t.x1][t.y1 + 1] != '1') {
+			nt = new tongtree(t.x1, t.y1 + 1, t.x2, t.y2 + 1, t.x3, t.y3 + 1, t.dir, t.count);
+		}
+		return nt;
+	}
+
+	public static tongtree rotate(tongtree t) {
+		tongtree nt = new tongtree(t.x1, t.y1, t.x2, t.y2, t.x3, t.y3, t.dir, t.count);
+		boolean b = true;
+		for (int k = 0; k < di.length; k++) {
+			int ni = t.x2 + di[k];
+			int nj = t.y2 + dj[k];
+			if (ni < 0 || ni >= N || nj < 0 || nj >= N || map[ni][nj] == '1') {
+				b = false;
+				break;
 			}
-			if(index==3) {
-				res = list.get(4)[0];
+		}
+		if (b) {
+			if (t.dir == -1) {
+				nt = new tongtree(t.x1 - 1, t.y1 + 1, t.x2, t.y2, t.x3 + 1, t.y3 - 1, t.dir * -1, t.count);
+
+			} else {
+				nt = new tongtree(t.x1 + 1, t.y1 - 1, t.x2, t.y2, t.x3 - 1, t.y3 + 1, t.dir * -1, t.count);
+
+			}
+		}
+		return nt;
+	}
+
+	public static boolean isEqual(tongtree t1, tongtree t2) {
+		if (t1.x1 == t2.x1 && t1.x2 == t2.x2 && t1.x3 == t2.x3 && t1.y1 == t2.y1 && t1.y2 == t2.y2 && t1.y3 == t2.y3) {
+			return true;
+		} else
+			return false;
+	}
+
+	public static void bfs(ArrayList<int[]> tree) {
+		int x = 0;
+
+		if (tree.get(0)[0] == tree.get(1)[0])
+			x = -1;
+		else
+			x = 1;
+
+		tongtree t = new tongtree(tree.get(0)[0], tree.get(0)[1], tree.get(1)[0], tree.get(1)[1], tree.get(2)[0],
+				tree.get(2)[1], x, 0);
+		v[t.x2][t.y2] = t.dir;
+		Queue<tongtree> q = new LinkedList<>();
+		q.offer(t);
+		while (!q.isEmpty()) {
+			tongtree tt = q.poll();
+			System.out.println(tt.x2 + " " + tt.y2);
+			if (tt.x2 == heretree.x2 && tt.y2 == heretree.y2 && tt.dir == heretree.dir) {
+				res = tt.count;
 				return;
 			}
-			for(int i=0;i<4; i++) {
-				list = temp;
-				if(move(i)) {
-					list.get(4)[0]++;
-					q.offer(list);
-				}
+
+			tongtree nt = up(tt);
+			if (!isEqual(nt, tt) && v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
+				nt.count++;
+				q.offer(nt);
 			}
-			list = temp;
-			if(rotate()) {
-				list.get(3)[0] *= -1;
-				list.get(4)[0]++;
-				q.offer(list);
+			nt = down(tt);
+			if (!isEqual(nt, tt)&& v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
+				nt.count++;
+				q.offer(nt);
 			}
+			nt = left(tt);
+			if (!isEqual(nt, tt)&& v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
+				nt.count++;
+				q.offer(nt);
+			}
+			nt = right(tt);
+			if (!isEqual(nt, tt)&& v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
+				nt.count++;
+				q.offer(nt);
+			}
+			nt = rotate(tt);
+			if (!isEqual(nt, tt)&& v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
+				nt.count++;
+				q.offer(nt);
+			}
+
 		}
-		
+
 	}
-	
+
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
 		map = new char[N][N];
-		tree = new ArrayList<>();
-		here = new ArrayList<>();
-		v = new int[N*N][][];
-		for(int i=0; i<N; i++) {
+		v = new int[N][N];
+		for (int i = 0; i < N; i++) {
 			map[i] = br.readLine().toCharArray();
 		}
-		for(int i=0; i<N; i++) {
-			for(int j=0; j<N; j++) {
-				if(map[i][j] == 'B') {
-					tree.add(new int[] {i,j});
-				}
-				else if(map[i][j] == 'E') {
-					here.add(new int[] {i,j});
+		ArrayList<int[]> tree = new ArrayList<>();
+		ArrayList<int[]> here = new ArrayList<>();
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				if (map[i][j] == 'B') {
+					tree.add(new int[] { i, j });
+				} else if (map[i][j] == 'E') {
+					here.add(new int[] { i, j });
 				}
 			}
 		}
-		if(tree.get(1)[0] == tree.get(0)[0]) tree.add(new int[] {-1});
-		else tree.add(new int[] {1});
-		bfs();
-			
+		int x = 0;
+
+		if (here.get(0)[0] == here.get(1)[0])
+			x = -1;
+		else
+			x = 1;
+		heretree = new tongtree(here.get(0)[0], here.get(0)[1], here.get(1)[0], here.get(1)[1], here.get(2)[0],
+				here.get(2)[1], x, 0);
+		bfs(tree);
+
 		System.out.println(res);
 	}
 
