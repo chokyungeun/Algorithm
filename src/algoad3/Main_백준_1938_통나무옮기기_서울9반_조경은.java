@@ -10,6 +10,7 @@ public class Main_백준_1938_통나무옮기기_서울9반_조경은 {
 	public static int[][] v;
 	public static int[] di = { -1, -1, -1, 0, 1, 1, 1, 0 };
 	public static int[] dj = { -1, 0, 1, 1, 1, 0, -1, -1 };
+
 //방문처리!!
 	public static class tongtree {
 		int x1;
@@ -33,10 +34,11 @@ public class Main_백준_1938_통나무옮기기_서울9반_조경은 {
 		}
 
 	}
-
+	
+	//위로 이동
 	public static tongtree up(tongtree t) {
 		tongtree nt = new tongtree(t.x1, t.y1, t.x2, t.y2, t.x3, t.y3, t.dir, t.count);
-		if (t.x1 - 1 >= 0 && map[t.x1 - 1][t.y1] != '1') {
+		if (t.x1 - 1 >= 0 && map[t.x1 - 1][t.y1] != '1' && map[t.x2 - 1][t.y2] != '1' && map[t.x3 - 1][t.y3] != '1') { //이동할수있는지 체크
 			nt = new tongtree(t.x1 - 1, t.y1, t.x2 - 1, t.y2, t.x3 - 1, t.y3, t.dir, t.count);
 		}
 		return nt;
@@ -45,7 +47,7 @@ public class Main_백준_1938_통나무옮기기_서울9반_조경은 {
 
 	public static tongtree down(tongtree t) {
 		tongtree nt = new tongtree(t.x1, t.y1, t.x2, t.y2, t.x3, t.y3, t.dir, t.count);
-		if (t.x3 + 1 < N && map[t.x3 + 1][t.y3] != '1') {
+		if (t.x3 + 1 < N && map[t.x3 + 1][t.y3] != '1' && map[t.x2 + 1][t.y2] != '1' && map[t.x1 + 1][t.y1] != '1') {//이동할수있는지 체크
 			nt = new tongtree(t.x1 + 1, t.y1, t.x2 + 1, t.y2, t.x3 + 1, t.y3, t.dir, t.count);
 		}
 		return nt;
@@ -53,7 +55,7 @@ public class Main_백준_1938_통나무옮기기_서울9반_조경은 {
 
 	public static tongtree left(tongtree t) {
 		tongtree nt = new tongtree(t.x1, t.y1, t.x2, t.y2, t.x3, t.y3, t.dir, t.count);
-		if (t.y1 - 1 >= 0 && map[t.x1][t.y1 - 1] != '1' && map[t.x2][t.y2 - 1] != '1' && map[t.x3][t.y3 - 1] != '1') {
+		if (t.y1 - 1 >= 0 && map[t.x1][t.y1 - 1] != '1' && map[t.x2][t.y2 - 1] != '1' && map[t.x3][t.y3 - 1] != '1') {//이동할수있는지 체크
 			nt = new tongtree(t.x1, t.y1 - 1, t.x2, t.y2 - 1, t.x3, t.y3 - 1, t.dir, t.count);
 
 		}
@@ -62,7 +64,7 @@ public class Main_백준_1938_통나무옮기기_서울9반_조경은 {
 
 	public static tongtree right(tongtree t) {
 		tongtree nt = new tongtree(t.x1, t.y1, t.x2, t.y2, t.x3, t.y3, t.dir, t.count);
-		if (t.y3 + 1 < N && map[t.x3][t.y3 + 1] != '1' && map[t.x2][t.y2 + 1] != '1' && map[t.x1][t.y1 + 1] != '1') {
+		if (t.y3 + 1 < N && map[t.x3][t.y3 + 1] != '1' && map[t.x2][t.y2 + 1] != '1' && map[t.x1][t.y1 + 1] != '1') {//이동할수있는지 체크
 			nt = new tongtree(t.x1, t.y1 + 1, t.x2, t.y2 + 1, t.x3, t.y3 + 1, t.dir, t.count);
 		}
 		return nt;
@@ -74,12 +76,12 @@ public class Main_백준_1938_통나무옮기기_서울9반_조경은 {
 		for (int k = 0; k < di.length; k++) {
 			int ni = t.x2 + di[k];
 			int nj = t.y2 + dj[k];
-			if (ni < 0 || ni >= N || nj < 0 || nj >= N || map[ni][nj] == '1') {
+			if (ni < 0 || ni >= N || nj < 0 || nj >= N || map[ni][nj] == '1') {//이동할수있는지 체크
 				b = false;
 				break;
 			}
 		}
-		if (b) {
+		if (b) {//이동가능한 경우
 			if (t.dir == -1) {
 				nt = new tongtree(t.x1 - 1, t.y1 + 1, t.x2, t.y2, t.x3 + 1, t.y3 - 1, t.dir * -1, t.count);
 
@@ -89,13 +91,6 @@ public class Main_백준_1938_통나무옮기기_서울9반_조경은 {
 			}
 		}
 		return nt;
-	}
-
-	public static boolean isEqual(tongtree t1, tongtree t2) {
-		if (t1.x1 == t2.x1 && t1.x2 == t2.x2 && t1.x3 == t2.x3 && t1.y1 == t2.y1 && t1.y2 == t2.y2 && t1.y3 == t2.y3) {
-			return true;
-		} else
-			return false;
 	}
 
 	public static void bfs(ArrayList<int[]> tree) {
@@ -113,36 +108,61 @@ public class Main_백준_1938_통나무옮기기_서울9반_조경은 {
 		q.offer(t);
 		while (!q.isEmpty()) {
 			tongtree tt = q.poll();
-			System.out.println(tt.x2 + " " + tt.y2);
+			// System.out.println(tt.x2 + " " + tt.y2 + " " + tt.dir + " " + tt.count);
 			if (tt.x2 == heretree.x2 && tt.y2 == heretree.y2 && tt.dir == heretree.dir) {
 				res = tt.count;
 				return;
 			}
 
 			tongtree nt = up(tt);
-			if (!isEqual(nt, tt) && v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
+			if (v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
 				nt.count++;
 				q.offer(nt);
+				if (v[nt.x2][nt.y2] == 0) {
+					v[nt.x2][nt.y2] = nt.dir;
+				} else {
+					v[nt.x2][nt.y2] = 3;
+				}
 			}
 			nt = down(tt);
-			if (!isEqual(nt, tt)&& v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
+			if ( v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
 				nt.count++;
 				q.offer(nt);
+				if (v[nt.x2][nt.y2] == 0) {
+					v[nt.x2][nt.y2] = nt.dir;
+				} else {
+					v[nt.x2][nt.y2] = 3;
+				}
 			}
 			nt = left(tt);
-			if (!isEqual(nt, tt)&& v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
+			if ( v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
 				nt.count++;
 				q.offer(nt);
+				if (v[nt.x2][nt.y2] == 0) {
+					v[nt.x2][nt.y2] = nt.dir;
+				} else {
+					v[nt.x2][nt.y2] = 3;
+				}
 			}
 			nt = right(tt);
-			if (!isEqual(nt, tt)&& v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
+			if ( v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
 				nt.count++;
 				q.offer(nt);
+				if (v[nt.x2][nt.y2] == 0) {
+					v[nt.x2][nt.y2] = nt.dir;
+				} else {
+					v[nt.x2][nt.y2] = 3;
+				}
 			}
 			nt = rotate(tt);
-			if (!isEqual(nt, tt)&& v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
+			if (v[nt.x2][nt.y2] != 3 && v[nt.x2][nt.y2] != nt.dir) {
 				nt.count++;
 				q.offer(nt);
+				if (v[nt.x2][nt.y2] == 0) {
+					v[nt.x2][nt.y2] = nt.dir;
+				} else {
+					v[nt.x2][nt.y2] = 3;
+				}
 			}
 
 		}
