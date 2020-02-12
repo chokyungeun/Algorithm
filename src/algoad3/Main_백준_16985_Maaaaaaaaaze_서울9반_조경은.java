@@ -20,7 +20,7 @@ public class Main_백준_16985_Maaaaaaaaaze_서울9반_조경은 {
 					temp[i][j] = Arrays.copyOf(map[d[i]][j], map[d[i]][j].length);
 				}
 			}
-			rotate();
+			go();
 			return;
 		}
 		for(int i=0; i<5; i++) {
@@ -34,13 +34,31 @@ public class Main_백준_16985_Maaaaaaaaaze_서울9반_조경은 {
 	}
 	
 	//회전은 powerset
-	public static void rotate() {
+	public static void go() {
 		//5가지 판을 0,1,2,3번 돌렸을 경우. => 4^5
+		int[] arr;
+		for(int i=0; i<4; i++) {
+			for(int j=0; j<4; j++) {
+				for(int k=0; k<4; k++) {
+					for(int l=0; l<4; l++) {
+						for(int m=0; m<4; m++) {
+							arr = new int[]{i,j,k,l,m};
+							rotate(arr);
+						}
+					}
+				}
+			}
+		}
 		
 	}
 	
-	public static void go() {
-		
+	public static void rotate(int[] num) {
+		for(int i=0; i<5; i++) {
+			int n = num[i];
+			for(int j=0; j<n; j++) {
+				
+			}
+		}
 	}
 	
 	
@@ -49,7 +67,7 @@ public class Main_백준_16985_Maaaaaaaaaze_서울9반_조경은 {
 		StringTokenizer st;
 		map = new int[5][5][5];
 		memo = new int[5][5][5];
-		
+		res=-1;
 		for(int i=0; i<5; i++) {
 			for(int j=0; j<5; j++) {
 				st = new StringTokenizer(br.readLine());
