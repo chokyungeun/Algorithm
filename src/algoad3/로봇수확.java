@@ -19,7 +19,7 @@ public class 로봇수확 {
 				int ni = i + di[(dir+3+k)%4];
 				int nj = j + dj[(dir+3+k)%4];
 				if(ni>=0 && ni<N && nj>=0 && nj<N && map[ni][nj]!=1) {
-					if(v[ni][nj]!=0) {
+					if(v[ni][nj]!=0) { 
 						if(day > v[ni][nj]+3+seed[ni][nj]) { //현재 빈농지이고 다음에 수확할 곡식농지
 							v[i][j]=day;
 							seed[i][j]++;
