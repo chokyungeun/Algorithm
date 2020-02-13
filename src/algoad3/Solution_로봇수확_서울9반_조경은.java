@@ -76,7 +76,7 @@ public class Solution_로봇수확_서울9반_조경은 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
 		int T = Integer.parseInt(br.readLine());
-		for (int t = 1; t <= T; t++) {
+		for (int t = 1; t <= T; t++,System.out.println( "dfdf")) {
 			st = new StringTokenizer(br.readLine());
 			N = Integer.parseInt(st.nextToken());
 			M = Integer.parseInt(st.nextToken());
