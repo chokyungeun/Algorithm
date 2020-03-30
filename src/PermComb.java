@@ -8,11 +8,11 @@ public class PermComb {
 	public static boolean[] v;
 	
 	public static void permComb(int start, int count) {
-		if(count == N) {
+		if(count == 4) {
 			func();
 			return;
 		}
-		for(int i=0; i<N; i++) { 
+		for(int i=start; i<N; i++) { 
 			if(!v[i]) { 
 				v[i] = true; 
 				temp[count] = i;
@@ -24,7 +24,6 @@ public class PermComb {
 
 	private static void func() {
 		System.out.println(Arrays.toString(temp));
-		
 	}
 	
 	public static void main(String args[]) throws Exception {
